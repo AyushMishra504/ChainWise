@@ -4,12 +4,21 @@ import { useState } from "react";
 import type { PortwatchSource } from "@/lib/portwatch-map";
 import { NEWS_FEEDS } from "@/data/news-feeds";
 
+export type SearchOption = {
+  id: string;
+  label: string;
+  type: "port" | "route" | "chokepoint" | "scenario";
+  detail: string;
+};
+
 type TopBarProps = {
   /** Latest PortWatch data date, shown in the live status chip. */
   dataAsOf: string | null;
   dataSource: PortwatchSource | null;
   /** Name of the scenario being replayed, or null while live. */
   replayName: string | null;
+  searchOptions: SearchOption[];
+  onSearchSelect: (option: SearchOption) => void;
 };
 
 const SOURCE_SUFFIX: Record<PortwatchSource, string> = {
@@ -18,9 +27,21 @@ const SOURCE_SUFFIX: Record<PortwatchSource, string> = {
   snapshot: " (snapshot)",
 };
 
-export default function TopBar({ dataAsOf, dataSource, replayName }: TopBarProps) {
+export default function TopBar({
+  dataAsOf,
+  dataSource,
+  replayName,
+  searchOptions,
+  onSearchSelect,
+}: TopBarProps) {
   const [sourcesOpen, setSourcesOpen] = useState(false);
+  const [query, setQuery] = useState("");
   const live = replayName === null;
+  const matches = query.trim()
+    ? searchOptions
+        .filter((option) => `${option.label} ${option.detail}`.toLowerCase().includes(query.trim().toLowerCase()))
+        .slice(0, 8)
+    : [];
 
   return (
     <header className="z-40 col-span-full flex h-14 shrink-0 select-none items-center justify-between gap-4 border-b border-app-border bg-app-panel px-4">
@@ -28,12 +49,50 @@ export default function TopBar({ dataAsOf, dataSource, replayName }: TopBarProps
         <span className="text-[14px] font-semibold tracking-tight text-app-text">ChainWise</span>
       </div>
 
-      <div className="hidden w-80 max-w-sm md:block">
+      <div className="relative hidden w-80 max-w-sm md:block">
         <input
           type="text"
           placeholder="Search port, route, or chokepoint"
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
+          onKeyDown={(event) => {
+            if (event.key === "Escape") setQuery("");
+            if (event.key === "Enter" && matches[0]) {
+              onSearchSelect(matches[0]);
+              setQuery("");
+            }
+          }}
+          role="combobox"
+          aria-label="Search ports, routes, chokepoints, and scenarios"
+          aria-expanded={matches.length > 0}
+          aria-controls="search-suggestions"
           className="w-full rounded-[4px] border border-app-border bg-app-input px-3 py-1.5 text-[14px] text-app-text placeholder-app-muted transition focus:border-app-muted focus:outline-none"
         />
+        {matches.length > 0 ? (
+          <ul
+            id="search-suggestions"
+            className="absolute inset-x-0 top-full z-50 mt-1 overflow-hidden rounded-[4px] border border-app-border bg-app-panel shadow-panel"
+          >
+            {matches.map((option) => (
+              <li key={`${option.type}-${option.id}`}>
+                <button
+                  type="button"
+                  className="flex w-full items-center justify-between gap-3 px-3 py-2 text-left transition hover:bg-app-elevated"
+                  onMouseDown={(event) => event.preventDefault()}
+                  onClick={() => {
+                    onSearchSelect(option);
+                    setQuery("");
+                  }}
+                >
+                  <span className="min-w-0 truncate text-[12px] text-app-text">{option.label}</span>
+                  <span className="shrink-0 text-[10px] uppercase tracking-wider text-app-muted">
+                    {option.type}
+                  </span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        ) : null}
       </div>
 
       <div className="flex items-center gap-2">

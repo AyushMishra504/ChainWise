@@ -13,6 +13,7 @@ import type { LineLayerSpecification } from 'maplibre-gl'
 import type { Chokepoint } from '@/data/chokepoints'
 import type { Port } from '@/data/ports'
 import type { ComputedRoute } from '@/data/routes'
+import type { Reroute } from '@/lib/seaRouting'
 import type { ChokepointAnalysis } from '@/lib/engine/analysis'
 import type { PortAnalysis } from '@/lib/engine/portAnalysis'
 import { PORTWATCH_BY_CHOKEPOINT } from '@/lib/portwatch-map'
@@ -86,6 +87,18 @@ const routeHitLayerSpec: LineLayerSpecification = {
   paint: { 'line-color': 'transparent', 'line-width': 14 },
 }
 
+const rerouteLineLayerSpec: LineLayerSpecification = {
+  id: 'reroute-line',
+  type: 'line',
+  source: 'reroute',
+  paint: {
+    'line-color': '#e8a33d',
+    'line-width': 2.5,
+    'line-opacity': 0.95,
+    'line-dasharray': [2, 1.5],
+  },
+}
+
 const routeCollection = (routes: ComputedRoute[]) => ({
   type: 'FeatureCollection' as const,
   features: routes.map((route) => ({
@@ -96,6 +109,17 @@ const routeCollection = (routes: ComputedRoute[]) => ({
       coordinates: route.path,
     },
   })),
+})
+
+const rerouteCollection = (reroute: Reroute | null) => ({
+  type: 'FeatureCollection' as const,
+  features: reroute
+    ? [{
+        type: 'Feature' as const,
+        properties: { id: 'reroute' },
+        geometry: { type: 'LineString' as const, coordinates: reroute.path },
+      }]
+    : [],
 })
 
 type PaintValue = Parameters<MapLibreMap['setPaintProperty']>[2]
@@ -141,7 +165,7 @@ const STATUS_LABEL: Record<DisplayStatus, string> = {
   normal: 'Normal',
   watch: 'Watch',
   disrupted: 'Disrupted',
-  'severely-disrupted': 'Severely disrupted',
+  'severely-disrupted': 'Severe structural decline',
   'structurally-down': 'Structurally down',
   'low-volume': 'Low volume',
   'no-data': 'No data',
@@ -366,10 +390,14 @@ export type MapApi = {
 const scenarioBannerClass =
   'pointer-events-none w-max select-none whitespace-nowrap rounded-[4px] border border-app-red bg-app-surface px-1.5 py-0.5 text-[10px] font-medium text-app-red shadow-panel'
 
+const ROUTE_HOVER_CHOKEPOINT_CLASS = 'route-hover-chokepoint'
+
 type MapProps = {
   chokepoints: Chokepoint[]
   ports: Port[]
   routes: ComputedRoute[]
+  /** Alternate geometry for the selected route while one or more chokepoints are blocked. */
+  reroute?: Reroute | null
   selectedRouteId?: string | null
   onSelectRoute?: (route: ComputedRoute) => void
   /** Chokepoint ids whose edges the current routes must avoid (drawn as blocked). */
@@ -384,6 +412,8 @@ type MapProps = {
   dataAsOf?: string | null
   /** Currently selected chokepoint (highlighted, shown in the right panel). */
   selectedChokepointId?: string | null
+  /** Chokepoint being hovered in the route details panel. */
+  highlightedChokepointId?: string | null
   /** Currently selected port (highlighted, shown in the right panel). */
   selectedPortId?: string | null
   /** Route ids in the focused lane; others are dimmed (null = no lane focus). */
@@ -408,6 +438,7 @@ export default function MapView({
   chokepoints,
   ports,
   routes,
+  reroute = null,
   selectedRouteId = null,
   onSelectRoute,
   blockedChokepointIds = [],
@@ -416,6 +447,7 @@ export default function MapView({
   portAnalysis = null,
   dataAsOf = null,
   selectedChokepointId = null,
+  highlightedChokepointId = null,
   selectedPortId = null,
   focusedRouteIds = null,
   showRoutes = true,
@@ -477,6 +509,14 @@ export default function MapView({
   const chokepointLabelStateRef = useRef(new Map<string, ChokepointLabelState>())
   const portLabelStateRef = useRef(new Map<string, PortLabelState>())
 
+  const highlightRouteChokepoints = (routeId: string | null) => {
+    const route = routeId ? routesRef.current.find((item) => item.id === routeId) : null
+    const routeChokepoints = new Set(route?.passesThrough ?? [])
+    for (const [id, { dot }] of chokepointMarkersRef.current) {
+      dot.classList.toggle(ROUTE_HOVER_CHOKEPOINT_CLASS, routeChokepoints.has(id))
+    }
+  }
+
   const applyRoutePaint = () => {
     const map = mapRef.current
     if (!map || !map.getLayer('routes-line')) return
@@ -528,6 +568,11 @@ export default function MapView({
       })
       map.addLayer(routesLineLayerSpec)
       map.addLayer(routeHitLayerSpec)
+      map.addSource('reroute', {
+        type: 'geojson',
+        data: rerouteCollection(null),
+      })
+      map.addLayer(rerouteLineLayerSpec)
 
       map.on('click', 'routes-hit', (e) => {
         const feature = e.features?.[0] as MapGeoJSONFeature | undefined
@@ -542,6 +587,7 @@ export default function MapView({
         if (id !== hoveredRouteRef.current) {
           hoveredRouteRef.current = id
           applyRoutePaint()
+          highlightRouteChokepoints(id)
         }
         map.getCanvas().style.cursor = 'pointer'
       })
@@ -549,6 +595,7 @@ export default function MapView({
         if (hoveredRouteRef.current !== null) {
           hoveredRouteRef.current = null
           applyRoutePaint()
+          highlightRouteChokepoints(null)
         }
         map.getCanvas().style.cursor = ''
       })
@@ -605,6 +652,18 @@ export default function MapView({
     }
   }, [routes, mapReady])
 
+  // Keep the alternate path separate from the canonical route so the user can
+  // compare the original lane with the detour at a glance.
+  useEffect(() => {
+    if (!mapReady) return
+    const source = mapRef.current?.getSource('reroute')
+    if (source && 'setData' in source) {
+      (source as { setData: (data: ReturnType<typeof rerouteCollection>) => void }).setData(
+        rerouteCollection(reroute),
+      )
+    }
+  }, [reroute, mapReady])
+
   // Route colour/width/opacity: selection + hover + lane focus.
   useEffect(() => {
     if (!mapReady) return
@@ -618,7 +677,7 @@ export default function MapView({
     const map = mapRef.current
     if (!map) return
     const visibility = showRoutes ? 'visible' : 'none'
-    for (const layerId of ['routes-line', 'routes-hit']) {
+    for (const layerId of ['routes-line', 'routes-hit', 'reroute-line']) {
       if (map.getLayer(layerId)) map.setLayoutProperty(layerId, 'visibility', visibility)
     }
   }, [showRoutes, mapReady])
@@ -690,30 +749,57 @@ export default function MapView({
           : isBlocked
             ? 'ring-2 ring-app-red/80'
             : ''
-      const dotClass = `${CP_STATUS_DOT[displayStatus]} ${ring}`.trim()
+      const hoveredRoute = hoveredRouteRef.current
+        ? routesRef.current.find((route) => route.id === hoveredRouteRef.current)
+        : null
+      const routeHighlighted = hoveredRoute?.passesThrough.includes(id) ?? false
+      const panelHighlighted = id === highlightedChokepointId
+      const dotClass =
+        `${CP_STATUS_DOT[displayStatus]} ${ring} ${
+          routeHighlighted || panelHighlighted ? ROUTE_HOVER_CHOKEPOINT_CLASS : ''
+        }`.trim()
       const previous = labelStates.get(id)
       if (previous?.dotClass !== dotClass) dot.setAttribute('class', dotClass)
+      const input: ChokepointLabelInput = {
+        name,
+        country,
+        status: displayStatus,
+        baseline: result?.baseline ?? null,
+        changePct: result?.changePct ?? null,
+        structuralPct: result?.structuralPct ?? null,
+        matched,
+        blocked: isBlocked,
+        dataAsOf,
+        newsStatus: newsByChokepoint?.[id] ?? null,
+      }
+      const rendered = chokepointLabelSignature(input)
+      if (panelHighlighted) {
+        const marker = chokepointMarkersRef.current.get(id)
+        if (marker && previous?.rendered !== rendered) {
+          renderChokepointLabel(marker.label, input)
+        }
+        marker?.label.style.setProperty('opacity', '1')
+      } else {
+        chokepointMarkersRef.current.get(id)?.label.style.removeProperty('opacity')
+      }
 
       // Only memoise the inputs; the tooltip DOM is rebuilt lazily on hover.
       labelStates.set(id, {
         dotClass,
-        rendered: previous?.rendered ?? null,
-        input: {
-          name,
-          country,
-          status: displayStatus,
-          baseline: result?.baseline ?? null,
-          changePct: result?.changePct ?? null,
-          structuralPct: result?.structuralPct ?? null,
-          matched,
-          blocked: isBlocked,
-          dataAsOf,
-          newsStatus: newsByChokepoint?.[id] ?? null,
-        },
+        rendered: panelHighlighted ? rendered : previous?.rendered ?? null,
+        input,
       })
     }
     recordReplayTime('map', performance.now() - profileStart, dataAsOf)
-  }, [chokepointAnalysis, newsByChokepoint, dataAsOf, blockedChokepointIds, selectedChokepointId, mapReady])
+  }, [
+    chokepointAnalysis,
+    newsByChokepoint,
+    dataAsOf,
+    blockedChokepointIds,
+    selectedChokepointId,
+    highlightedChokepointId,
+    mapReady,
+  ])
 
   // Toggle chokepoint marker visibility.
   useEffect(() => {

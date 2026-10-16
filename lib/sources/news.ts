@@ -176,6 +176,12 @@ export async function fetchLiveNews(): Promise<Payload> {
   const results = await Promise.all(NEWS_FEEDS.map((feed) => fetchFeed(feed)));
   const items = dedupeByLink(results.flatMap((result) => result.items));
   const statuses = results.map((result) => result.status);
+  if (items.length === 0) {
+    const failures = statuses
+      .map((status) => `${status.name}: ${status.error ?? "no items"}`)
+      .join("; ");
+    throw new Error(`No trade-news feeds returned usable items (${failures})`);
+  }
   return {
     fetchedAt: new Date().toISOString(),
     items,
@@ -210,6 +216,10 @@ function isFresh(payload: Payload): boolean {
   return Number.isFinite(at) && Date.now() - at < CACHE_TTL_MS;
 }
 
+function hasUsableItems(payload: Payload): boolean {
+  return payload.items.length > 0;
+}
+
 function emptyPayload(): Payload {
   return {
     fetchedAt: null,
@@ -224,10 +234,12 @@ function emptyPayload(): Payload {
  * the rolling log), else the stale on-disk cache, else the committed snapshot.
  */
 export async function getNewsSnapshot(): Promise<NewsSnapshot> {
-  if (memoryCache && isFresh(memoryCache.payload)) return { ...memoryCache.payload, source: "cache" };
+  if (memoryCache && isFresh(memoryCache.payload) && hasUsableItems(memoryCache.payload)) {
+    return { ...memoryCache.payload, source: "cache" };
+  }
 
   const disk = await readPayloadFile(CACHE_FILE);
-  if (disk && isFresh(disk)) {
+  if (disk && isFresh(disk) && hasUsableItems(disk)) {
     memoryCache = { at: Date.parse(disk.fetchedAt!), payload: disk };
     return { ...disk, source: "cache" };
   }
@@ -240,7 +252,7 @@ export async function getNewsSnapshot(): Promise<NewsSnapshot> {
     memoryCache = { at: Date.now(), payload };
     await writePayloadFile(CACHE_FILE, payload);
     return { ...payload, source: "live" };
-  } catch (error) {
+  } catch {
     const fallback = disk ?? (await readPayloadFile(SNAPSHOT_FILE));
     if (fallback) {
       memoryCache = { at: Date.now(), payload: fallback };

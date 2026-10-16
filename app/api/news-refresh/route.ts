@@ -1,7 +1,8 @@
-import { NextResponse } from "next/server";
+import { connection, NextResponse } from "next/server";
 import { refreshNewsSnapshot } from "@/lib/sources/news";
 
 export async function GET() {
+  await connection();
   try {
     const snapshot = await refreshNewsSnapshot();
     return NextResponse.json({

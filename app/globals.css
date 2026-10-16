@@ -74,6 +74,14 @@ body {
   animation: chart-dot 200ms ease-out;
 }
 
+.route-hover-chokepoint {
+  position: relative;
+  z-index: 2;
+  transform: scale(1.55);
+  box-shadow: 0 0 0 3px rgba(232, 163, 61, 0.8);
+  transition: transform 120ms ease-out, box-shadow 120ms ease-out;
+}
+
 @keyframes chart-dot {
   from {
     opacity: 0;

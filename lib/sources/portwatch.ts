@@ -20,7 +20,7 @@ import {
   type PortwatchDay,
   type PortwatchSeries,
   type PortwatchSnapshot,
-} from "@/lib/portwatch-map";
+} from "../portwatch-map.ts";
 
 const QUERY_URL =
   "https://services9.arcgis.com/weJ1QsnbMYJlCHdG/ArcGIS/rest/services/Daily_Chokepoints_Data/FeatureServer/0/query";

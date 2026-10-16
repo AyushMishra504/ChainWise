@@ -8,8 +8,10 @@ import type { ComputedRoute } from "@/data/routes";
 import type { Reroute } from "@/lib/seaRouting";
 import type { DisruptionResult, DisplayStatus, TransitPoint } from "@/lib/engine/disruption";
 import type { PortAnalysis, PortPoint } from "@/lib/engine/portAnalysis";
+import { CORROBORATION_DETAIL, CORROBORATION_LABEL, type ChokepointNews } from "@/lib/engine/corroboration";
 import ChokepointChart from "@/components/ChokepointChart";
 import PortChart from "@/components/PortChart";
+import AgentAnalysis from "@/components/AgentAnalysis";
 
 type RightPanelProps = {
   chokepoints: Chokepoint[];
@@ -18,6 +20,7 @@ type RightPanelProps = {
   blockedCpIds: string[];
   reroute: Reroute | null;
   onBlockToggle: (chokepoint: Chokepoint) => void;
+  onChokepointHover: (chokepointId: string | null) => void;
   selectedChokepoint: Chokepoint | null;
   chokepointResult: DisruptionResult | null;
   /** Charted window for the selected chokepoint (event window during a replay). */
@@ -33,6 +36,10 @@ type RightPanelProps = {
   /** Live per-port analysis, used for a route's origin/destination status. */
   portAnalysis: Record<string, PortAnalysis> | null;
   dataAsOf: string | null;
+  news: ChokepointNews | null;
+  newsLoading: boolean;
+  newsError: string | null;
+  onResizeStart: (clientX: number) => void;
   onClear: () => void;
 };
 
@@ -40,7 +47,7 @@ const STATUS_LABEL: Record<DisplayStatus, string> = {
   normal: "Normal",
   watch: "Watch",
   disrupted: "Disrupted",
-  "severely-disrupted": "Severely disrupted",
+  "severely-disrupted": "Severe structural decline",
   "structurally-down": "Structurally down",
   "low-volume": "Low volume",
   "no-data": "No data",
@@ -67,6 +74,12 @@ function toneFor(status: DisplayStatus): "text" | "amber" | "red" | "muted" {
   if (status === "disrupted" || status === "severely-disrupted") return "red";
   if (status === "watch" || status === "structurally-down") return "amber";
   return "muted";
+}
+
+function newsTone(status: ChokepointNews["status"]): string {
+  if (status === "corroborated") return "text-app-red";
+  if (status === "unconfirmed" || status === "early-warning") return "text-app-amber";
+  return "text-app-muted";
 }
 
 function Stat({
@@ -107,6 +120,7 @@ export default memo(function RightPanel({
   blockedCpIds,
   reroute,
   onBlockToggle,
+  onChokepointHover,
   selectedChokepoint,
   chokepointResult,
   chokepointChartSeries,
@@ -117,6 +131,10 @@ export default memo(function RightPanel({
   portChartVisible,
   portAnalysis,
   dataAsOf,
+  news,
+  newsLoading,
+  newsError,
+  onResizeStart,
   onClear,
 }: RightPanelProps) {
   if (!selectedChokepoint && !selectedPort && !selectedRoute) return null;
@@ -144,7 +162,16 @@ export default memo(function RightPanel({
     : null;
 
   return (
-    <aside className="flex h-full min-h-0 flex-col overflow-hidden border-l border-app-border bg-app-panel">
+    <aside className="relative flex h-full min-h-0 flex-col overflow-hidden border-l border-app-border bg-app-panel">
+      <div
+        role="separator"
+        aria-label="Resize details panel"
+        aria-orientation="vertical"
+        onPointerDown={(event) => onResizeStart(event.clientX)}
+        className="group absolute inset-y-0 left-0 z-10 w-2 -translate-x-1/2 cursor-col-resize touch-none"
+      >
+        <div className="mx-auto h-full w-px bg-transparent transition group-hover:bg-app-amber/70" />
+      </div>
       <div className="flex shrink-0 items-start justify-between gap-3 border-b border-app-border p-4">
         <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-2">
@@ -223,17 +250,27 @@ export default memo(function RightPanel({
                   {routeChokepoints.map((chokepoint) => {
                     const blocked = blockedCpIds.includes(chokepoint.id);
                     return (
-                      <li key={chokepoint.id} className="flex items-center justify-between gap-2">
-                        <span className="min-w-0 truncate text-[14px] text-app-text">
+                      <li
+                        key={chokepoint.id}
+                        className="group flex items-center justify-between gap-2"
+                        onMouseEnter={() => onChokepointHover(chokepoint.id)}
+                        onMouseLeave={() => onChokepointHover(null)}
+                      >
+                        <span className="min-w-0 truncate text-[14px] text-app-text group-hover:underline">
                           {chokepoint.name}
                         </span>
-                        {blocked ? (
-                          <span className="shrink-0 text-[12px] font-medium text-app-amber">
-                            Blocked
-                          </span>
-                        ) : (
-                          <span className="shrink-0 text-[12px] text-app-muted">Open</span>
-                        )}
+                        <button
+                          type="button"
+                          onClick={() => onBlockToggle(chokepoint)}
+                          className={`shrink-0 rounded-[4px] px-2 py-1 text-[12px] font-medium transition ${
+                            blocked
+                              ? "text-app-amber hover:bg-app-amber/10"
+                              : "text-app-muted hover:bg-app-elevated hover:text-app-text"
+                          }`}
+                          aria-label={`${blocked ? "Unblock" : "Block"} ${chokepoint.name}`}
+                        >
+                          {blocked ? "Unblock" : "Block"}
+                        </button>
                       </li>
                     );
                   })}
@@ -336,6 +373,7 @@ export default memo(function RightPanel({
               label="vs baseline"
               tone={toneFor(chokepointStatus)}
             />
+            <AgentAnalysis key={selectedChokepoint.id} chokepointId={selectedChokepoint.id} />
             <section>
               <SectionTitle>Daily transits</SectionTitle>
               <div className="mt-2">
@@ -344,6 +382,58 @@ export default memo(function RightPanel({
                   visible={chokepointChartVisible}
                   baseline={chokepointResult?.baseline ?? null}
                 />
+              </div>
+            </section>
+            <section>
+              <SectionTitle>Trade-news signal</SectionTitle>
+              <div className="mt-2 space-y-2">
+                {newsLoading ? <p className="text-[12px] text-app-muted">Loading trade-news…</p> : null}
+                {newsError ? <p className="text-[12px] text-app-red">Trade-news unavailable: {newsError}</p> : null}
+                {!newsLoading && !newsError && news ? (
+                  <>
+                    <div className="flex items-center justify-between gap-2">
+                      <span className={`text-[14px] font-medium ${newsTone(news.status)}`}>
+                        {CORROBORATION_LABEL[news.status]}
+                      </span>
+                      <span className="font-mono text-[12px] text-app-muted">
+                        {news.signal.recentMentions} mention{news.signal.recentMentions === 1 ? "" : "s"} / 7d
+                      </span>
+                    </div>
+                    <p className="text-[12px] text-app-muted">{CORROBORATION_DETAIL[news.status]}</p>
+                    {news.status === "no-news-data" ? (
+                      <p className="border-t border-app-divider pt-2 text-[12px] text-app-muted">
+                        No trade-news feed items are available right now.
+                      </p>
+                    ) : news.signal.headlines.length > 0 ? (
+                      <ul className="space-y-2 border-t border-app-divider pt-2">
+                        {news.signal.headlines.slice(0, 3).map((headline) => (
+                          <li key={headline.link}>
+                            <a
+                              href={headline.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="block text-[12px] text-app-text hover:underline"
+                            >
+                              {headline.title}
+                            </a>
+                            <span className="text-[10px] text-app-muted">
+                              {headline.source} · {headline.date}
+                            </span>
+                          </li>
+                        ))}
+                        {news.signal.headlines.length > 3 ? (
+                          <li className="pt-1 text-[10px] text-app-muted">
+                            Showing the three most recent matching headlines.
+                          </li>
+                        ) : null}
+                      </ul>
+                    ) : (
+                      <p className="border-t border-app-divider pt-2 text-[12px] text-app-muted">
+                        No matching headlines in the last seven days.
+                      </p>
+                    )}
+                  </>
+                ) : null}
               </div>
             </section>
             <div className="flex flex-wrap gap-2">

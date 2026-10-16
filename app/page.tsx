@@ -5,6 +5,7 @@ import { measureReplay, profileDate, recordReplayTime } from '@/lib/replayPerfor
 import Map from '@/components/Map'
 import type { MapApi } from '@/components/Map'
 import TopBar from '@/components/TopBar'
+import type { SearchOption } from '@/components/TopBar'
 import LeftPanel from '@/components/LeftPanel'
 import RightPanel from '@/components/RightPanel'
 import MapControls from '@/components/MapControls'
@@ -33,8 +34,7 @@ import { dateRange, addDays } from '@/lib/engine/dates'
 import { measureScenario, dropAt } from '@/lib/engine/replay'
 import type { EventImpact } from '@/lib/engine/replay'
 import { corroborateAll, type ChokepointNews } from '@/lib/engine/corroboration'
-import { NEWS_FEEDS } from '@/data/news-feeds'
-import type { NewsSnapshot } from '@/data/news-feeds'
+import { NEWS_QUERIES } from '@/data/news-queries'
 
 const REPLAY_TICK_MS = 220
 
@@ -84,7 +84,9 @@ function Home() {
   const [mapApi, setMapApi] = useState<MapApi | null>(null)
   const [selectedChokepoint, setSelectedChokepoint] = useState<Chokepoint | null>(null)
   const [selectedPort, setSelectedPort] = useState<Port | null>(null)
+  const [highlightedChokepointId, setHighlightedChokepointId] = useState<string | null>(null)
   const [selectedLane, setSelectedLane] = useState<Lane | null>(null)
+  const [rightPanelWidth, setRightPanelWidth] = useState(360)
 
   // Chokepoints: log a line for every one that needs attention as data lands.
   const portwatch = usePortwatch(({ analysis, snapshot }) => {
@@ -147,6 +149,16 @@ function Home() {
   const newsFeed = useNews()
   const newsSnapshot = newsFeed.snapshot
 
+  const searchOptions = useMemo<SearchOption[]>(
+    () => [
+      ...ports.map((port) => ({ id: port.id, label: port.name, type: "port" as const, detail: port.country })),
+      ...computedRoutes.map((route) => ({ id: route.id, label: route.name, type: "route" as const, detail: route.lane })),
+      ...chokepoints.map((cp) => ({ id: cp.id, label: cp.name, type: "chokepoint" as const, detail: cp.country })),
+      ...scenarios.map((scenario) => ({ id: scenario.id, label: scenario.name, type: "scenario" as const, detail: scenario.kind })),
+    ],
+    [computedRoutes],
+  )
+
   // Measured historical impact of each scenario, from real PortWatch data.
   const impacts = useMemo(() => {
     if (!snapshot) return null
@@ -180,6 +192,15 @@ function Home() {
     if (!snapshot) return portwatch.analysis
     return measureReplay(displayedReplayDate, 'analysis', () => analyzeSnapshot(snapshot, allChokepointIds, displayedReplayDate ?? undefined))
   }, [snapshot, portwatch.analysis, allChokepointIds, displayedReplayDate])
+
+  const newsAsOf = displayedReplayDate ?? newsSnapshot?.items[0]?.date ?? snapshot?.latestDate ?? null
+  const newsByChokepoint = useMemo<Record<string, ChokepointNews>>(() => {
+    if (!newsAsOf) return {}
+    const transit = Object.fromEntries(
+      Object.entries(analysis ?? {}).map(([id, result]) => [id, result.status]),
+    )
+    return corroborateAll(NEWS_QUERIES, newsSnapshot?.items ?? [], transit, newsAsOf)
+  }, [analysis, newsAsOf, newsSnapshot])
 
   const portAnalysis: Record<string, PortAnalysis> | null = useMemo(() => {
     if (!portsSnapshot) return portsFeed.analysis
@@ -399,6 +420,22 @@ function Home() {
     setSelectedChokepoint(null)
   }, [])
 
+  const selectSearchOption = useCallback((option: SearchOption) => {
+    if (option.type === "port") {
+      const port = ports.find((item) => item.id === option.id)
+      if (port) selectPort(port)
+    } else if (option.type === "route") {
+      const route = computedRoutes.find((item) => item.id === option.id)
+      if (route) selectRoute(route)
+    } else if (option.type === "chokepoint") {
+      const chokepoint = chokepoints.find((item) => item.id === option.id)
+      if (chokepoint) selectChokepoint(chokepoint)
+    } else {
+      const scenario = scenarioById(option.id)
+      if (scenario) startReplay(scenario)
+    }
+  }, [computedRoutes, selectChokepoint, selectPort, selectRoute, startReplay])
+
   const clearMapSelection = useCallback(() => {
     setSelectedRoute(null)
     setSelectedChokepoint(null)
@@ -426,17 +463,33 @@ function Home() {
   // The right column only exists when something is selected.
   const rightOpen = Boolean(selectedRoute || selectedChokepoint || selectedPort)
 
+  const startRightPanelResize = useCallback((clientX: number) => {
+    setRightPanelWidth(Math.min(560, Math.max(300, window.innerWidth - clientX)))
+    const onMove = (event: PointerEvent) => {
+      const width = Math.min(560, Math.max(300, window.innerWidth - event.clientX))
+      setRightPanelWidth(width)
+    }
+    const onUp = () => {
+      window.removeEventListener('pointermove', onMove)
+      window.removeEventListener('pointerup', onUp)
+    }
+    window.addEventListener('pointermove', onMove)
+    window.addEventListener('pointerup', onUp)
+  }, [])
+
   return (
     <main
       className="grid h-dvh w-full grid-rows-[56px_minmax(0,1fr)_44px] overflow-hidden bg-app-bg text-app-text"
       style={{
-        gridTemplateColumns: `${leftCollapsed ? 56 : 320}px minmax(0, 1fr) ${rightOpen ? 360 : 0}px`,
+        gridTemplateColumns: `${leftCollapsed ? 56 : 320}px minmax(0, 1fr) ${rightOpen ? rightPanelWidth : 0}px`,
       }}
     >
       <TopBar
         dataAsOf={dataAsOf}
         dataSource={snapshot?.source ?? null}
         replayName={activeScenario?.name ?? null}
+        searchOptions={searchOptions}
+        onSearchSelect={selectSearchOption}
       />
 
       <LeftPanel
@@ -461,6 +514,7 @@ function Home() {
           chokepoints={chokepoints}
           ports={ports}
           routes={displayRoutes}
+          reroute={reroute}
           selectedRouteId={selectedRoute?.id ?? null}
           onSelectRoute={selectRoute}
           blockedChokepointIds={effectiveBlocked}
@@ -468,6 +522,7 @@ function Home() {
           portAnalysis={portAnalysis}
           dataAsOf={dataAsOf}
           selectedChokepointId={selectedChokepoint?.id ?? null}
+          highlightedChokepointId={highlightedChokepointId}
           selectedPortId={selectedPort?.id ?? null}
           focusedRouteIds={focusedRouteIds}
           onSelectChokepoint={selectChokepoint}
@@ -479,6 +534,9 @@ function Home() {
           onReady={setMapApi}
           scenarioName={activeScenario?.name ?? null}
           scenarioChokepointId={activeScenario?.chokepointIds[0] ?? null}
+          newsByChokepoint={Object.fromEntries(
+            Object.entries(newsByChokepoint).map(([id, value]) => [id, value.status]),
+          )}
         />
 
         {activeScenario && replayDate ? (
@@ -508,6 +566,7 @@ function Home() {
           blockedCpIds={effectiveBlocked}
           reroute={reroute}
           onBlockToggle={toggleChokepoint}
+          onChokepointHover={setHighlightedChokepointId}
           selectedChokepoint={selectedChokepoint}
           chokepointResult={selectedChokepointResult}
           chokepointChartSeries={chokepointChartSeries}
@@ -518,6 +577,10 @@ function Home() {
           portChartVisible={portChartVisible}
           portAnalysis={portAnalysis}
           dataAsOf={dataAsOf}
+          news={selectedChokepoint ? newsByChokepoint[selectedChokepoint.id] ?? null : null}
+          newsLoading={newsFeed.loading}
+          newsError={newsFeed.error}
+          onResizeStart={startRightPanelResize}
           onClear={clearMapSelection}
         />
       ) : null}
