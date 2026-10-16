@@ -1,0 +1,15 @@
+
+> chainwise@0.1.0 dev
+> next dev
+
+▲ Next.js 16.4.1 (Turbopack)
+- Local:         http://localhost:62837
+- Network:       http://10.67.37.159:62837
+✓ Ready in 569ms
+✓ Running next.config.ts took 38ms
+- Cache Components enabled
+- Partial Prefetching enabled
+
+ GET / 200 in 539ms (next.js: 202ms, application-code: 337ms)
+ GET / 200 in 105ms (next.js: 5ms, application-code: 100ms)
+[?25h
