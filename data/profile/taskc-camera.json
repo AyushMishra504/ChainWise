@@ -1,0 +1,138 @@
+{
+  "label": "taskc-camera",
+  "card": "Hormuz",
+  "sessions": [
+    {
+      "n": 38,
+      "analysis": 0.715789472978366,
+      "map": 0.09210526355003056,
+      "render": 12.934210525923653
+    }
+  ],
+  "median": {
+    "analysis": 0.715789472978366,
+    "map": 0.09210526355003056,
+    "render": 12.934210525923653
+  },
+  "webgl": true,
+  "markers": 40,
+  "warnings": [],
+  "tooltipDump": null,
+  "initial": {
+    "replayBar": false,
+    "detailsPanel": false,
+    "headerChip": "ChainWiseData sources",
+    "pageOverflow": {
+      "x": false,
+      "y": false
+    }
+  },
+  "cardLabelAfterClick": "Playing",
+  "layout": {
+    "header": {
+      "x": 0,
+      "y": 0,
+      "w": 1570,
+      "h": 56
+    },
+    "footer": {
+      "x": 0,
+      "y": 761,
+      "w": 1570,
+      "h": 44
+    },
+    "left": {
+      "x": 0,
+      "y": 56,
+      "w": 320,
+      "h": 705
+    },
+    "right": {
+      "x": 1210,
+      "y": 56,
+      "w": 360,
+      "h": 705
+    },
+    "map": {
+      "x": 320,
+      "y": 56,
+      "w": 890,
+      "h": 705
+    },
+    "clipped": {
+      "x": false,
+      "y": false
+    }
+  },
+  "backToLive": true,
+  "liveState": {
+    "headerChip": "ChainWiseData sourcesLive, data to 2026-10-11 (cached)",
+    "replayBar": false,
+    "detailsPanel": true,
+    "pageOverflow": {
+      "x": false,
+      "y": false
+    }
+  },
+  "scenarioState": {
+    "detailsPanel": true,
+    "panelTitle": "Strait of Hormuz",
+    "chart": true,
+    "chartNote": null
+  },
+  "camera": {
+    "nearestChokepoint": "Strait of HormuzIran · OmanDisrupted · -",
+    "distancePx": 180,
+    "mapSize": {
+      "w": 890,
+      "h": 705
+    }
+  },
+  "routeChokepoints": {
+    "jnpt-rotterdam": [
+      "Suez CanalOpen",
+      "Bab-el-MandebOpen",
+      "Strait of GibraltarOpen",
+      "English Channel (Dover Strait)Open",
+      "Gulf of AdenOpen"
+    ],
+    "mundra-rotterdam": [
+      "Suez CanalOpen",
+      "Bab-el-MandebOpen",
+      "Strait of GibraltarOpen",
+      "English Channel (Dover Strait)Open"
+    ],
+    "chennai-shanghai": [
+      "Strait of MalaccaOpen",
+      "Taiwan StraitOpen",
+      "Singapore StraitOpen"
+    ],
+    "jebel-ali-mundra": [
+      "Strait of HormuzBlocked"
+    ],
+    "cochin-singapore": [
+      "Strait of MalaccaOpen",
+      "Singapore StraitOpen"
+    ],
+    "mundra-new-york": [
+      "Suez CanalOpen",
+      "Bab-el-MandebOpen",
+      "Strait of GibraltarOpen"
+    ],
+    "ras-tanura-sikka": [
+      "Strait of HormuzBlocked"
+    ],
+    "novorossiysk-sikka": [
+      "Suez CanalOpen",
+      "Bab-el-MandebOpen",
+      "Bosphorus StraitOpen",
+      "DardanellesOpen"
+    ]
+  },
+  "portPanel": {
+    "title": "Rotterdam",
+    "chart": true,
+    "notEnoughData": false,
+    "picked": "ok"
+  }
+}

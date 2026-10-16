@@ -1,0 +1,63 @@
+{
+  "label": "taskc-camera3",
+  "card": "Hormuz",
+  "sessions": [
+    {
+      "n": 0,
+      "analysis": 0,
+      "map": 0,
+      "render": 0
+    }
+  ],
+  "median": {
+    "analysis": 0,
+    "map": 0,
+    "render": 0
+  },
+  "webgl": true,
+  "markers": 0,
+  "warnings": [],
+  "tooltipDump": null,
+  "initial": {
+    "replayBar": false,
+    "detailsPanel": false,
+    "headerChip": null,
+    "pageOverflow": {
+      "x": false,
+      "y": false
+    }
+  },
+  "cardLabelAfterClick": null,
+  "layout": {
+    "header": null,
+    "footer": null,
+    "left": null,
+    "right": null,
+    "map": null,
+    "clipped": {
+      "x": false,
+      "y": false
+    }
+  },
+  "backToLive": false,
+  "liveState": {
+    "headerChip": null,
+    "replayBar": false,
+    "detailsPanel": false,
+    "pageOverflow": {
+      "x": false,
+      "y": false
+    }
+  },
+  "scenarioState": {
+    "detailsPanel": false,
+    "panelTitle": null,
+    "chart": false,
+    "chartNote": "no-chart"
+  },
+  "camera": null,
+  "cameraInitial": null,
+  "cameraBefore": null,
+  "routeChokepoints": null,
+  "portPanel": null
+}

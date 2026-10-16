@@ -1,0 +1,239 @@
+{
+  "label": "graph-progress-panels",
+  "card": "Hormuz",
+  "sessions": [
+    {
+      "n": 32,
+      "analysis": 0.5437500001862645,
+      "map": 0.04062499990686774,
+      "render": 5.543749999254942
+    }
+  ],
+  "median": {
+    "analysis": 0.5437500001862645,
+    "map": 0.04062499990686774,
+    "render": 5.543749999254942
+  },
+  "webgl": true,
+  "markers": 40,
+  "warnings": [],
+  "tooltipDump": null,
+  "initial": {
+    "replayBar": false,
+    "detailsPanel": false,
+    "headerChip": "ChainWiseData sources",
+    "pageOverflow": {
+      "x": false,
+      "y": false
+    }
+  },
+  "cardLabelAfterClick": "Playing",
+  "layout": {
+    "header": {
+      "x": 0,
+      "y": 0,
+      "w": 1570,
+      "h": 56
+    },
+    "footer": {
+      "x": 0,
+      "y": 761,
+      "w": 1570,
+      "h": 44
+    },
+    "left": {
+      "x": 0,
+      "y": 56,
+      "w": 320,
+      "h": 705
+    },
+    "right": {
+      "x": 1210,
+      "y": 56,
+      "w": 360,
+      "h": 705
+    },
+    "map": {
+      "x": 320,
+      "y": 56,
+      "w": 890,
+      "h": 705
+    },
+    "clipped": {
+      "x": false,
+      "y": false
+    }
+  },
+  "backToLive": true,
+  "liveState": {
+    "headerChip": "ChainWiseData sourcesLive, data to 2026-10-11 (cached)",
+    "replayBar": false,
+    "detailsPanel": true,
+    "pageOverflow": {
+      "x": false,
+      "y": false
+    }
+  },
+  "scenarioState": {
+    "detailsPanel": true,
+    "panelTitle": "Strait of Hormuz",
+    "chart": true,
+    "chartNote": null,
+    "bannerText": "Hormuz crisis 2026",
+    "bannerColor": "rgb(222, 67, 67)",
+    "bannerGapAboveDotPx": 3
+  },
+  "camera": {
+    "nearest": [
+      {
+        "name": "Strait of HormuzIran · OmanDis",
+        "distancePx": 291
+      },
+      {
+        "name": "Gulf of AdenYemen · Somalia · ",
+        "distancePx": 355
+      },
+      {
+        "name": "Strait of MalaccaMalaysia · In",
+        "distancePx": 376
+      },
+      {
+        "name": "Bab-el-MandebYemen · Djibouti ",
+        "distancePx": 415
+      }
+    ],
+    "mapSize": {
+      "w": 890,
+      "h": 705
+    }
+  },
+  "cameraInitial": {
+    "nearest": [
+      {
+        "name": "Strait of HormuzIran · OmanSev",
+        "distancePx": 291
+      },
+      {
+        "name": "Gulf of AdenYemen · Somalia · ",
+        "distancePx": 355
+      },
+      {
+        "name": "Strait of MalaccaMalaysia · In",
+        "distancePx": 376
+      },
+      {
+        "name": "Bab-el-MandebYemen · Djibouti ",
+        "distancePx": 415
+      }
+    ],
+    "mapSize": {
+      "w": 1250,
+      "h": 705
+    }
+  },
+  "cameraBefore": {
+    "nearest": [
+      {
+        "name": "Strait of HormuzIran · OmanWat",
+        "distancePx": 291
+      },
+      {
+        "name": "Gulf of AdenYemen · Somalia · ",
+        "distancePx": 355
+      },
+      {
+        "name": "Strait of MalaccaMalaysia · In",
+        "distancePx": 376
+      },
+      {
+        "name": "Bab-el-MandebYemen · Djibouti ",
+        "distancePx": 415
+      }
+    ],
+    "mapSize": {
+      "w": 890,
+      "h": 705
+    }
+  },
+  "chartRedraw": {
+    "present": true,
+    "distinctNodes": 8,
+    "distinctOffsets": [
+      "0.739385px",
+      "0.620009px",
+      "0.407901px",
+      "0.314439px",
+      "0.154771px",
+      "0.0439936px",
+      "0.0116907px",
+      "0px",
+      "1px",
+      "0.739823px",
+      "0.511585px",
+      "0.410613px"
+    ],
+    "animationName": "chart-draw",
+    "maxAnimations": 1,
+    "drawnPointsFirst": 39,
+    "drawnPointsLast": 46,
+    "drawnPointSteps": [
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46
+    ],
+    "footer": "30 Jan127 max17 Mar",
+    "replayDays": 225
+  },
+  "routeChokepoints": {
+    "jnpt-rotterdam": [
+      "Suez CanalOpen",
+      "Bab-el-MandebOpen",
+      "Strait of GibraltarOpen",
+      "English Channel (Dover Strait)Open",
+      "Gulf of AdenOpen"
+    ],
+    "mundra-rotterdam": [
+      "Suez CanalOpen",
+      "Bab-el-MandebOpen",
+      "Strait of GibraltarOpen",
+      "English Channel (Dover Strait)Open"
+    ],
+    "chennai-shanghai": [
+      "Strait of MalaccaOpen",
+      "Taiwan StraitOpen",
+      "Singapore StraitOpen"
+    ],
+    "jebel-ali-mundra": [
+      "Strait of HormuzBlocked"
+    ],
+    "cochin-singapore": [
+      "Strait of MalaccaOpen",
+      "Singapore StraitOpen"
+    ],
+    "mundra-new-york": [
+      "Suez CanalOpen",
+      "Bab-el-MandebOpen",
+      "Strait of GibraltarOpen"
+    ],
+    "ras-tanura-sikka": [
+      "Strait of HormuzBlocked"
+    ],
+    "novorossiysk-sikka": [
+      "Suez CanalOpen",
+      "Bab-el-MandebOpen",
+      "Bosphorus StraitOpen",
+      "DardanellesOpen"
+    ]
+  },
+  "portPanel": {
+    "title": "Rotterdam",
+    "chart": true,
+    "notEnoughData": false,
+    "picked": "ok"
+  }
+}

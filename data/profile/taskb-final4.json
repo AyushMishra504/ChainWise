@@ -1,0 +1,77 @@
+{
+  "label": "taskb-final4",
+  "card": "Hormuz",
+  "sessions": [
+    {
+      "n": 29,
+      "analysis": 0.5655172400433441,
+      "map": 0.08620689706555729,
+      "render": 6.682758621100722
+    }
+  ],
+  "median": {
+    "analysis": 0.5655172400433441,
+    "map": 0.08620689706555729,
+    "render": 6.682758621100722
+  },
+  "webgl": true,
+  "markers": 40,
+  "warnings": [],
+  "tooltipDump": null,
+  "initial": {
+    "replayBar": false,
+    "detailsPanel": false,
+    "headerChip": "ChainWiseData sources",
+    "pageOverflow": {
+      "x": false,
+      "y": false
+    }
+  },
+  "cardLabelAfterClick": "Paused",
+  "layout": {
+    "header": {
+      "x": 0,
+      "y": 0,
+      "w": 1570,
+      "h": 56
+    },
+    "footer": {
+      "x": 0,
+      "y": 761,
+      "w": 1570,
+      "h": 44
+    },
+    "left": {
+      "x": 0,
+      "y": 56,
+      "w": 320,
+      "h": 705
+    },
+    "right": {
+      "x": 1210,
+      "y": 56,
+      "w": 360,
+      "h": 705
+    },
+    "map": {
+      "x": 320,
+      "y": 56,
+      "w": 890,
+      "h": 705
+    },
+    "clipped": {
+      "x": false,
+      "y": false
+    }
+  },
+  "backToLive": true,
+  "liveState": {
+    "headerChip": "ChainWiseData sourcesLive, data to 2026-10-11 (cached)",
+    "replayBar": false,
+    "detailsPanel": true,
+    "pageOverflow": {
+      "x": false,
+      "y": false
+    }
+  }
+}

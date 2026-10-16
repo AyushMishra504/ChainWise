@@ -1,0 +1,198 @@
+{
+  "label": "phase1-after",
+  "card": "Hormuz",
+  "sessions": [
+    {
+      "n": 32,
+      "analysis": 3.284375000745058,
+      "map": 0.09687499841675162,
+      "render": 10.284374998882413
+    },
+    {
+      "n": 32,
+      "analysis": 4.406250000931323,
+      "map": 0.13125000102445483,
+      "render": 19.02500000083819
+    },
+    {
+      "n": 32,
+      "analysis": 3.0093750013038516,
+      "map": 0.1124999993480742,
+      "render": 12.806249999906868
+    }
+  ],
+  "median": {
+    "analysis": 3.284375000745058,
+    "map": 0.1124999993480742,
+    "render": 12.806249999906868
+  },
+  "webgl": true,
+  "markers": 40,
+  "warnings": [],
+  "tooltipDump": {
+    "frame": "10",
+    "first": [
+      {
+        "html": "<div class=\"font-medium text-app-text\">Suez Canal</div><div class=\"text-[9px] uppercase tracking-wide text-app-muted\">Egypt</div><div class=\"mt-0.5 text-app-amber\">Structurally down · +4.3% vs baseline</div><div class=\"mt-0.5 text-app-muted\">Last 30d vs 2023: -43.1%</div><div class=\"mt-0.5 font-mono text-app-muted\">Source: IMF PortWatch · data to 2026-03-11</div>",
+        "text": "Suez CanalEgyptStructurally down · +4.3% vs baselineLast 30d vs 2023: -43.1%Source: IMF PortWatch · data to 2026-03-11"
+      },
+      {
+        "html": "<div class=\"font-medium text-app-text\">Strait of Hormuz</div><div class=\"text-[9px] uppercase tracking-wide text-app-muted\">Iran · Oman</div><div class=\"mt-0.5 text-app-red\">Disrupted · -96.3% vs baseline · Blocked</div><div class=\"mt-0.5 text-app-muted\">Last 30d vs 2023: -38.3%</div><div class=\"mt-0.5 font-mono text-app-muted\">Source: IMF PortWatch · data to 2026-03-11</div>",
+        "text": "Strait of HormuzIran · OmanDisrupted · -96.3% vs baseline · BlockedLast 30d vs 2023: -38.3%Source: IMF PortWatch · data to 2026-03-11"
+      },
+      {
+        "html": "<div class=\"font-medium text-app-text\">Strait of Malacca</div><div class=\"text-[9px] uppercase tracking-wide text-app-muted\">Malaysia · Indonesia</div><div class=\"mt-0.5 text-app-muted\">Normal · -3.6% vs baseline</div><div class=\"mt-0.5 text-app-muted\">Last 30d vs 2023: +6.5%</div><div class=\"mt-0.5 font-mono text-app-muted\">Source: IMF PortWatch · data to 2026-03-11</div>",
+        "text": "Strait of MalaccaMalaysia · IndonesiaNormal · -3.6% vs baselineLast 30d vs 2023: +6.5%Source: IMF PortWatch · data to 2026-03-11"
+      },
+      {
+        "html": "<div class=\"font-medium text-app-text\">Panama Canal</div><div class=\"text-[9px] uppercase tracking-wide text-app-muted\">Panama</div><div class=\"mt-0.5 text-app-muted\">Normal · +5.8% vs baseline</div><div class=\"mt-0.5 text-app-muted\">Last 30d vs 2023: +11.9%</div><div class=\"mt-0.5 font-mono text-app-muted\">Source: IMF PortWatch · data to 2026-03-11</div>",
+        "text": "Panama CanalPanamaNormal · +5.8% vs baselineLast 30d vs 2023: +11.9%Source: IMF PortWatch · data to 2026-03-11"
+      },
+      {
+        "html": "<div class=\"font-medium text-app-text\">Bab-el-Mandeb</div><div class=\"text-[9px] uppercase tracking-wide text-app-muted\">Yemen · Djibouti · Eritrea</div><div class=\"mt-0.5 text-app-amber\">Structurally down · -2.1% vs baseline</div><div class=\"mt-0.5 text-app-muted\">Last 30d vs 2023: -51.0%</div><div class=\"mt-0.5 font-mono text-app-muted\">Source: IMF PortWatch · data to 2026-03-11</div>",
+        "text": "Bab-el-MandebYemen · Djibouti · EritreaStructurally down · -2.1% vs baselineLast 30d vs 2023: -51.0%Source: IMF PortWatch · data to 2026-03-11"
+      },
+      {
+        "html": "<div class=\"font-medium text-app-text\">Cape of Good Hope</div><div class=\"text-[9px] uppercase tracking-wide text-app-muted\">South Africa</div><div class=\"mt-0.5 text-app-muted\">Normal · +6.2% vs baseline</div><div class=\"mt-0.5 text-app-muted\">Last 30d vs 2023: +86.8%</div><div class=\"mt-0.5 font-mono text-app-muted\">Source: IMF PortWatch · data to 2026-03-11</div>",
+        "text": "Cape of Good HopeSouth AfricaNormal · +6.2% vs baselineLast 30d vs 2023: +86.8%Source: IMF PortWatch · data to 2026-03-11"
+      },
+      {
+        "html": "<div class=\"font-medium text-app-text\">Strait of Gibraltar</div><div class=\"text-[9px] uppercase tracking-wide text-app-muted\">Spain · Morocco · Gibraltar</div><div class=\"mt-0.5 text-app-muted\">Normal · +3.8% vs baseline</div><div class=\"mt-0.5 text-app-muted\">Last 30d vs 2023: -2.6%</div><div class=\"mt-0.5 font-mono text-app-muted\">Source: IMF PortWatch · data to 2026-03-11</div>",
+        "text": "Strait of GibraltarSpain · Morocco · GibraltarNormal · +3.8% vs baselineLast 30d vs 2023: -2.6%Source: IMF PortWatch · data to 2026-03-11"
+      },
+      {
+        "html": "<div class=\"font-medium text-app-text\">Bosphorus Strait</div><div class=\"text-[9px] uppercase tracking-wide text-app-muted\">Turkey</div><div class=\"mt-0.5 text-app-muted\">Normal · +5.7% vs baseline</div><div class=\"mt-0.5 text-app-muted\">Last 30d vs 2023: -15.4%</div><div class=\"mt-0.5 font-mono text-app-muted\">Source: IMF PortWatch · data to 2026-03-11</div>",
+        "text": "Bosphorus StraitTurkeyNormal · +5.7% vs baselineLast 30d vs 2023: -15.4%Source: IMF PortWatch · data to 2026-03-11"
+      },
+      {
+        "html": "<div class=\"font-medium text-app-text\">Dardanelles</div><div class=\"text-[9px] uppercase tracking-wide text-app-muted\">Turkey</div><div class=\"mt-0.5 text-app-muted\">No data</div><div class=\"mt-0.5 font-mono text-app-muted\">Not covered by IMF PortWatch</div>",
+        "text": "DardanellesTurkeyNo dataNot covered by IMF PortWatch"
+      },
+      {
+        "html": "<div class=\"font-medium text-app-text\">English Channel (Dover Strait)</div><div class=\"text-[9px] uppercase tracking-wide text-app-muted\">United Kingdom · France</div><div class=\"mt-0.5 text-app-muted\">Normal · +3.0% vs baseline</div><div class=\"mt-0.5 text-app-muted\">Last 30d vs 2023: +1.3%</div><div class=\"mt-0.5 font-mono text-app-muted\">Source: IMF PortWatch · data to 2026-03-11</div>",
+        "text": "English Channel (Dover Strait)United Kingdom · FranceNormal · +3.0% vs baselineLast 30d vs 2023: +1.3%Source: IMF PortWatch · data to 2026-03-11"
+      },
+      {
+        "html": "<div class=\"font-medium text-app-text\">Taiwan Strait</div><div class=\"text-[9px] uppercase tracking-wide text-app-muted\">Taiwan · China</div><div class=\"mt-0.5 text-app-muted\">Normal · +0.3% vs baseline</div><div class=\"mt-0.5 text-app-muted\">Last 30d vs 2023: -8.8%</div><div class=\"mt-0.5 font-mono text-app-muted\">Source: IMF PortWatch · data to 2026-03-11</div>",
+        "text": "Taiwan StraitTaiwan · ChinaNormal · +0.3% vs baselineLast 30d vs 2023: -8.8%Source: IMF PortWatch · data to 2026-03-11"
+      },
+      {
+        "html": "<div class=\"font-medium text-app-text\">Singapore Strait</div><div class=\"text-[9px] uppercase tracking-wide text-app-muted\">Singapore · Indonesia · Malaysia</div><div class=\"mt-0.5 text-app-muted\">No data</div><div class=\"mt-0.5 font-mono text-app-muted\">Not covered by IMF PortWatch</div>",
+        "text": "Singapore StraitSingapore · Indonesia · MalaysiaNo dataNot covered by IMF PortWatch"
+      },
+      {
+        "html": "<div class=\"font-medium text-app-text\">Lombok Strait</div><div class=\"text-[9px] uppercase tracking-wide text-app-muted\">Indonesia</div><div class=\"mt-0.5 text-app-muted\">Normal · -2.6% vs baseline</div><div class=\"mt-0.5 text-app-muted\">Last 30d vs 2023: -4.3%</div><div class=\"mt-0.5 font-mono text-app-muted\">Source: IMF PortWatch · data to 2026-03-11</div>",
+        "text": "Lombok StraitIndonesiaNormal · -2.6% vs baselineLast 30d vs 2023: -4.3%Source: IMF PortWatch · data to 2026-03-11"
+      },
+      {
+        "html": "<div class=\"font-medium text-app-text\">Sunda Strait</div><div class=\"text-[9px] uppercase tracking-wide text-app-muted\">Indonesia</div><div class=\"mt-0.5 text-app-muted\">Normal · -7.8% vs baseline</div><div class=\"mt-0.5 text-app-muted\">Last 30d vs 2023: +15.1%</div><div class=\"mt-0.5 font-mono text-app-muted\">Source: IMF PortWatch · data to 2026-03-11</div>",
+        "text": "Sunda StraitIndonesiaNormal · -7.8% vs baselineLast 30d vs 2023: +15.1%Source: IMF PortWatch · data to 2026-03-11"
+      },
+      {
+        "html": "<div class=\"font-medium text-app-text\">Gulf of Aden</div><div class=\"text-[9px] uppercase tracking-wide text-app-muted\">Yemen · Somalia · Djibouti</div><div class=\"mt-0.5 text-app-muted\">No data</div><div class=\"mt-0.5 font-mono text-app-muted\">Not covered by IMF PortWatch</div>",
+        "text": "Gulf of AdenYemen · Somalia · DjiboutiNo dataNot covered by IMF PortWatch"
+      },
+      {
+        "html": "<div class=\"font-medium text-app-text\">Mozambique Channel</div><div class=\"text-[9px] uppercase tracking-wide text-app-muted\">Mozambique · Madagascar</div><div class=\"mt-0.5 text-app-muted\">No data</div><div class=\"mt-0.5 font-mono text-app-muted\">Not covered by IMF PortWatch</div>",
+        "text": "Mozambique ChannelMozambique · MadagascarNo dataNot covered by IMF PortWatch"
+      },
+      {
+        "html": "<div class=\"font-medium text-app-text\">JNPT (Nhava Sheva)</div><div class=\"mt-0.5 text-app-amber\">Structurally down · -10.2% vs baseline</div><div class=\"mt-0.5 text-app-muted\">Port calls 7d avg: 6.3</div><div class=\"mt-0.5 text-app-muted\">Import -10.0% · Export +13.4% (metric tons)</div><div class=\"mt-0.5 font-mono text-app-muted\">Source: IMF PortWatch · data to 2026-03-11</div>",
+        "text": "JNPT (Nhava Sheva)Structurally down · -10.2% vs baselinePort calls 7d avg: 6.3Import -10.0% · Export +13.4% (metric tons)Source: IMF PortWatch · data to 2026-03-11"
+      },
+      {
+        "html": "<div class=\"font-medium text-app-text\">Mundra</div><div class=\"mt-0.5 text-app-red\">Disrupted · -46.9% vs baseline</div><div class=\"mt-0.5 text-app-muted\">Port calls 7d avg: 3.7</div><div class=\"mt-0.5 text-app-muted\">Import -50.9% · Export -48.1% (metric tons)</div><div class=\"mt-0.5 font-mono text-app-muted\">Source: IMF PortWatch · data to 2026-03-11</div>",
+        "text": "MundraDisrupted · -46.9% vs baselinePort calls 7d avg: 3.7Import -50.9% · Export -48.1% (metric tons)Source: IMF PortWatch · data to 2026-03-11"
+      },
+      {
+        "html": "<div class=\"font-medium text-app-text\">Kandla</div><div class=\"mt-0.5 text-app-amber\">Watch · -19.0% vs baseline</div><div class=\"mt-0.5 text-app-muted\">Port calls 7d avg: 2.4</div><div class=\"mt-0.5 text-app-muted\">Import -6.6% · Export -20.4% (metric tons)</div><div class=\"mt-0.5 font-mono text-app-muted\">Source: IMF PortWatch · data to 2026-03-11</div>",
+        "text": "KandlaWatch · -19.0% vs baselinePort calls 7d avg: 2.4Import -6.6% · Export -20.4% (metric tons)Source: IMF PortWatch · data to 2026-03-11"
+      },
+      {
+        "html": "<div class=\"font-medium text-app-text\">Visakhapatnam</div><div class=\"mt-0.5 text-app-muted\">Normal · +61.9% vs baseline</div><div class=\"mt-0.5 text-app-muted\">Port calls 7d avg: 4.9</div><div class=\"mt-0.5 text-app-muted\">Import +70.5% · Export +163.1% (metric tons)</div><div class=\"mt-0.5 font-mono text-app-muted\">Source: IMF PortWatch · data to 2026-03-11</div>",
+        "text": "VisakhapatnamNormal · +61.9% vs baselinePort calls 7d avg: 4.9Import +70.5% · Export +163.1% (metric tons)Source: IMF PortWatch · data to 2026-03-11"
+      },
+      {
+        "html": "<div class=\"font-medium text-app-text\">Chennai (Madras)</div><div class=\"mt-0.5 text-app-muted\">Normal · -14.3% vs baseline</div><div class=\"mt-0.5 text-app-muted\">Port calls 7d avg: 3.4</div><div class=\"mt-0.5 text-app-muted\">Import +68.0% · Export +285.7% (metric tons)</div><div class=\"mt-0.5 font-mono text-app-muted\">Source: IMF PortWatch · data to 2026-03-11</div>",
+        "text": "Chennai (Madras)Normal · -14.3% vs baselinePort calls 7d avg: 3.4Import +68.0% · Export +285.7% (metric tons)Source: IMF PortWatch · data to 2026-03-11"
+      },
+      {
+        "html": "<div class=\"font-medium text-app-text\">Haldia</div><div class=\"mt-0.5 text-app-muted\">Low volume · +107.1% vs baseline</div><div class=\"mt-0.5 text-app-muted\">Baseline: 2.0 calls/day</div><div class=\"mt-0.5 text-app-muted\">Port calls 7d avg: 4.1</div><div class=\"mt-0.5 text-app-muted\">Import +11.6% · Export +557.1% (metric tons)</div><div class=\"mt-0.5 font-mono text-app-muted\">Source: IMF PortWatch · data to 2026-03-11</div>",
+        "text": "HaldiaLow volume · +107.1% vs baselineBaseline: 2.0 calls/dayPort calls 7d avg: 4.1Import +11.6% · Export +557.1% (metric tons)Source: IMF PortWatch · data to 2026-03-11"
+      },
+      {
+        "html": "<div class=\"font-medium text-app-text\">Paradip</div><div class=\"mt-0.5 text-app-muted\">Low volume · +42.9% vs baseline</div><div class=\"mt-0.5 text-app-muted\">Baseline: 2.0 calls/day</div><div class=\"mt-0.5 text-app-muted\">Port calls 7d avg: 2.9</div><div class=\"mt-0.5 text-app-muted\">Import +65.1% · Export +107.6% (metric tons)</div><div class=\"mt-0.5 font-mono text-app-muted\">Source: IMF PortWatch · data to 2026-03-11</div>",
+        "text": "ParadipLow volume · +42.9% vs baselineBaseline: 2.0 calls/dayPort calls 7d avg: 2.9Import +65.1% · Export +107.6% (metric tons)Source: IMF PortWatch · data to 2026-03-11"
+      },
+      {
+        "html": "<div class=\"font-medium text-app-text\">Tuticorin</div><div class=\"mt-0.5 text-app-muted\">Low volume · +50.0% vs baseline</div><div class=\"mt-0.5 text-app-muted\">Baseline: 2.0 calls/day</div><div class=\"mt-0.5 text-app-muted\">Port calls 7d avg: 3.0</div><div class=\"mt-0.5 text-app-muted\">Import +192.3% · Export +357.1% (metric tons)</div><div class=\"mt-0.5 font-mono text-app-muted\">Source: IMF PortWatch · data to 2026-03-11</div>",
+        "text": "TuticorinLow volume · +50.0% vs baselineBaseline: 2.0 calls/dayPort calls 7d avg: 3.0Import +192.3% · Export +357.1% (metric tons)Source: IMF PortWatch · data to 2026-03-11"
+      },
+      {
+        "html": "<div class=\"font-medium text-app-text\">Hazira</div><div class=\"mt-0.5 text-app-muted\">Low volume · -7.1% vs baseline</div><div class=\"mt-0.5 text-app-muted\">Baseline: 2.0 calls/day</div><div class=\"mt-0.5 text-app-muted\">Port calls 7d avg: 1.9</div><div class=\"mt-0.5 text-app-muted\">Import +54.3% · Export -64.3% (metric tons)</div><div class=\"mt-0.5 font-mono text-app-muted\">Source: IMF PortWatch · data to 2026-03-11</div>",
+        "text": "HaziraLow volume · -7.1% vs baselineBaseline: 2.0 calls/dayPort calls 7d avg: 1.9Import +54.3% · Export -64.3% (metric tons)Source: IMF PortWatch · data to 2026-03-11"
+      },
+      {
+        "html": "<div class=\"font-medium text-app-text\">New Mangalore</div><div class=\"mt-0.5 text-app-amber\">Watch · -21.4% vs baseline</div><div class=\"mt-0.5 text-app-muted\">Port calls 7d avg: 3.1</div><div class=\"mt-0.5 text-app-muted\">Import -30.1% · Export +17.5% (metric tons)</div><div class=\"mt-0.5 font-mono text-app-muted\">Source: IMF PortWatch · data to 2026-03-11</div>",
+        "text": "New MangaloreWatch · -21.4% vs baselinePort calls 7d avg: 3.1Import -30.1% · Export +17.5% (metric tons)Source: IMF PortWatch · data to 2026-03-11"
+      },
+      {
+        "html": "<div class=\"font-medium text-app-text\">Cochin (Kochi)</div><div class=\"mt-0.5 text-app-muted\">Normal · -4.8% vs baseline</div><div class=\"mt-0.5 text-app-muted\">Port calls 7d avg: 2.9</div><div class=\"mt-0.5 text-app-muted\">Import -38.1% · Export +589.3% (metric tons)</div><div class=\"mt-0.5 font-mono text-app-muted\">Source: IMF PortWatch · data to 2026-03-11</div>",
+        "text": "Cochin (Kochi)Normal · -4.8% vs baselinePort calls 7d avg: 2.9Import -38.1% · Export +589.3% (metric tons)Source: IMF PortWatch · data to 2026-03-11"
+      },
+      {
+        "html": "<div class=\"font-medium text-app-text\">Krishnapatnam</div><div class=\"mt-0.5 text-app-amber\">Watch · -19.0% vs baseline</div><div class=\"mt-0.5 text-app-muted\">Port calls 7d avg: 2.4</div><div class=\"mt-0.5 text-app-muted\">Import -1.2% · Export — (metric tons)</div><div class=\"mt-0.5 font-mono text-app-muted\">Source: IMF PortWatch · data to 2026-03-11</div>",
+        "text": "KrishnapatnamWatch · -19.0% vs baselinePort calls 7d avg: 2.4Import -1.2% · Export — (metric tons)Source: IMF PortWatch · data to 2026-03-11"
+      },
+      {
+        "html": "<div class=\"font-medium text-app-text\">Pipavav</div><div class=\"mt-0.5 text-app-muted\">Low volume · 0.0% vs baseline</div><div class=\"mt-0.5 text-app-muted\">Baseline: 1.0 calls/day</div><div class=\"mt-0.5 text-app-muted\">Port calls 7d avg: 1.0</div><div class=\"mt-0.5 text-app-muted\">Import +92.9% · Export — (metric tons)</div><div class=\"mt-0.5 font-mono text-app-muted\">Source: IMF PortWatch · data to 2026-03-11</div>",
+        "text": "PipavavLow volume · 0.0% vs baselineBaseline: 1.0 calls/dayPort calls 7d avg: 1.0Import +92.9% · Export — (metric tons)Source: IMF PortWatch · data to 2026-03-11"
+      },
+      {
+        "html": "<div class=\"font-medium text-app-text\">Kolkata</div><div class=\"mt-0.5 text-app-muted\">Low volume · +28.6% vs baseline</div><div class=\"mt-0.5 text-app-muted\">Baseline: 1.0 calls/day</div><div class=\"mt-0.5 text-app-muted\">Port calls 7d avg: 1.3</div><div class=\"mt-0.5 text-app-muted\">Import — · Export — (metric tons)</div><div class=\"mt-0.5 font-mono text-app-muted\">Source: IMF PortWatch · data to 2026-03-11</div>",
+        "text": "KolkataLow volume · +28.6% vs baselineBaseline: 1.0 calls/dayPort calls 7d avg: 1.3Import — · Export — (metric tons)Source: IMF PortWatch · data to 2026-03-11"
+      },
+      {
+        "html": "<div class=\"font-medium text-app-text\">Mormugao</div><div class=\"mt-0.5 text-app-muted\">Low volume · -57.1% vs baseline</div><div class=\"mt-0.5 text-app-muted\">Baseline: 1.0 calls/day</div><div class=\"mt-0.5 text-app-muted\">Port calls 7d avg: 0.4</div><div class=\"mt-0.5 text-app-muted\">Import +2271.4% · Export — (metric tons)</div><div class=\"mt-0.5 font-mono text-app-muted\">Source: IMF PortWatch · data to 2026-03-11</div>",
+        "text": "MormugaoLow volume · -57.1% vs baselineBaseline: 1.0 calls/dayPort calls 7d avg: 0.4Import +2271.4% · Export — (metric tons)Source: IMF PortWatch · data to 2026-03-11"
+      },
+      {
+        "html": "<div class=\"font-medium text-app-text\">Sikka</div><div class=\"mt-0.5 text-app-muted\">Low volume · +14.3% vs baseline</div><div class=\"mt-0.5 text-app-muted\">Baseline: 1.0 calls/day</div><div class=\"mt-0.5 text-app-muted\">Port calls 7d avg: 1.1</div><div class=\"mt-0.5 text-app-muted\">Import — · Export +51.1% (metric tons)</div><div class=\"mt-0.5 font-mono text-app-muted\">Source: IMF PortWatch · data to 2026-03-11</div>",
+        "text": "SikkaLow volume · +14.3% vs baselineBaseline: 1.0 calls/dayPort calls 7d avg: 1.1Import — · Export +51.1% (metric tons)Source: IMF PortWatch · data to 2026-03-11"
+      },
+      {
+        "html": "<div class=\"font-medium text-app-text\">Vizhinjam</div><div class=\"mt-0.5 text-app-muted\">Low volume · 0.0% vs baseline</div><div class=\"mt-0.5 text-app-muted\">Baseline: 1.0 calls/day</div><div class=\"mt-0.5 text-app-muted\">Port calls 7d avg: 1.0</div><div class=\"mt-0.5 text-app-muted\">Import -31.4% · Export +21.4% (metric tons)</div><div class=\"mt-0.5 font-mono text-app-muted\">Source: IMF PortWatch · data to 2026-03-11</div>",
+        "text": "VizhinjamLow volume · 0.0% vs baselineBaseline: 1.0 calls/dayPort calls 7d avg: 1.0Import -31.4% · Export +21.4% (metric tons)Source: IMF PortWatch · data to 2026-03-11"
+      },
+      {
+        "html": "<div class=\"font-medium text-app-text\">Shanghai</div><div class=\"mt-0.5 text-app-muted\">Normal · +3.0% vs baseline</div><div class=\"mt-0.5 text-app-muted\">Port calls 7d avg: 116.4</div><div class=\"mt-0.5 text-app-muted\">Import +11.6% · Export -13.9% (metric tons)</div><div class=\"mt-0.5 font-mono text-app-muted\">Source: IMF PortWatch · data to 2026-03-11</div>",
+        "text": "ShanghaiNormal · +3.0% vs baselinePort calls 7d avg: 116.4Import +11.6% · Export -13.9% (metric tons)Source: IMF PortWatch · data to 2026-03-11"
+      },
+      {
+        "html": "<div class=\"font-medium text-app-text\">Singapore</div><div class=\"mt-0.5 text-app-muted\">Normal · +0.2% vs baseline</div><div class=\"mt-0.5 text-app-muted\">Port calls 7d avg: 128.3</div><div class=\"mt-0.5 text-app-muted\">Import +16.7% · Export -1.2% (metric tons)</div><div class=\"mt-0.5 font-mono text-app-muted\">Source: IMF PortWatch · data to 2026-03-11</div>",
+        "text": "SingaporeNormal · +0.2% vs baselinePort calls 7d avg: 128.3Import +16.7% · Export -1.2% (metric tons)Source: IMF PortWatch · data to 2026-03-11"
+      },
+      {
+        "html": "<div class=\"font-medium text-app-text\">Jebel Ali</div><div class=\"mt-0.5 text-app-red\">Disrupted · -97.6% vs baseline</div><div class=\"mt-0.5 text-app-muted\">Port calls 7d avg: 0.6</div><div class=\"mt-0.5 text-app-muted\">Import -99.1% · Export -97.8% (metric tons)</div><div class=\"mt-0.5 font-mono text-app-muted\">Source: IMF PortWatch · data to 2026-03-11</div>",
+        "text": "Jebel AliDisrupted · -97.6% vs baselinePort calls 7d avg: 0.6Import -99.1% · Export -97.8% (metric tons)Source: IMF PortWatch · data to 2026-03-11"
+      },
+      {
+        "html": "<div class=\"font-medium text-app-text\">Rotterdam</div><div class=\"mt-0.5 text-app-muted\">Normal · +3.2% vs baseline</div><div class=\"mt-0.5 text-app-muted\">Port calls 7d avg: 82.6</div><div class=\"mt-0.5 text-app-muted\">Import -5.7% · Export +16.0% (metric tons)</div><div class=\"mt-0.5 font-mono text-app-muted\">Source: IMF PortWatch · data to 2026-03-11</div>",
+        "text": "RotterdamNormal · +3.2% vs baselinePort calls 7d avg: 82.6Import -5.7% · Export +16.0% (metric tons)Source: IMF PortWatch · data to 2026-03-11"
+      },
+      {
+        "html": "<div class=\"font-medium text-app-text\">New York / New Jersey</div><div class=\"mt-0.5 text-app-muted\">Normal · +28.6% vs baseline</div><div class=\"mt-0.5 text-app-muted\">Port calls 7d avg: 11.6</div><div class=\"mt-0.5 text-app-muted\">Import +35.4% · Export +24.1% (metric tons)</div><div class=\"mt-0.5 font-mono text-app-muted\">Source: IMF PortWatch · data to 2026-03-11</div>",
+        "text": "New York / New JerseyNormal · +28.6% vs baselinePort calls 7d avg: 11.6Import +35.4% · Export +24.1% (metric tons)Source: IMF PortWatch · data to 2026-03-11"
+      },
+      {
+        "html": "<div class=\"font-medium text-app-text\">Ras Tanura</div><div class=\"mt-0.5 text-app-muted\">Low volume · +14.3% vs baseline</div><div class=\"mt-0.5 text-app-muted\">Baseline: 1.0 calls/day</div><div class=\"mt-0.5 text-app-muted\">Port calls 7d avg: 1.1</div><div class=\"mt-0.5 text-app-muted\">Import — · Export -67.6% (metric tons)</div><div class=\"mt-0.5 font-mono text-app-muted\">Source: IMF PortWatch · data to 2026-03-11</div>",
+        "text": "Ras TanuraLow volume · +14.3% vs baselineBaseline: 1.0 calls/dayPort calls 7d avg: 1.1Import — · Export -67.6% (metric tons)Source: IMF PortWatch · data to 2026-03-11"
+      },
+      {
+        "html": "<div class=\"font-medium text-app-text\">Novorossiysk</div><div class=\"mt-0.5 text-app-muted\">Normal · +31.7% vs baseline</div><div class=\"mt-0.5 text-app-muted\">Port calls 7d avg: 11.9</div><div class=\"mt-0.5 text-app-muted\">Import +76.2% · Export +87.3% (metric tons)</div><div class=\"mt-0.5 font-mono text-app-muted\">Source: IMF PortWatch · data to 2026-03-11</div>",
+        "text": "NovorossiyskNormal · +31.7% vs baselinePort calls 7d avg: 11.9Import +76.2% · Export +87.3% (metric tons)Source: IMF PortWatch · data to 2026-03-11"
+      }
+    ],
+    "stable": true
+  }
+}

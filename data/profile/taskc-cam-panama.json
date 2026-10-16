@@ -1,0 +1,157 @@
+{
+  "label": "taskc-cam-panama",
+  "card": "Panama",
+  "sessions": [
+    {
+      "n": 29,
+      "analysis": 0.6275862069993183,
+      "map": 0.055172415129069625,
+      "render": 6.686206895215758
+    }
+  ],
+  "median": {
+    "analysis": 0.6275862069993183,
+    "map": 0.055172415129069625,
+    "render": 6.686206895215758
+  },
+  "webgl": true,
+  "markers": 40,
+  "warnings": [],
+  "tooltipDump": null,
+  "initial": {
+    "replayBar": false,
+    "detailsPanel": false,
+    "headerChip": "ChainWiseData sources",
+    "pageOverflow": {
+      "x": false,
+      "y": false
+    }
+  },
+  "cardLabelAfterClick": "Playing",
+  "layout": {
+    "header": {
+      "x": 0,
+      "y": 0,
+      "w": 1570,
+      "h": 56
+    },
+    "footer": {
+      "x": 0,
+      "y": 761,
+      "w": 1570,
+      "h": 44
+    },
+    "left": {
+      "x": 0,
+      "y": 56,
+      "w": 320,
+      "h": 705
+    },
+    "right": {
+      "x": 1210,
+      "y": 56,
+      "w": 360,
+      "h": 705
+    },
+    "map": {
+      "x": 320,
+      "y": 56,
+      "w": 890,
+      "h": 705
+    },
+    "clipped": {
+      "x": false,
+      "y": false
+    }
+  },
+  "backToLive": true,
+  "liveState": {
+    "headerChip": "ChainWiseData sourcesLive, data to 2026-10-11 (cached)",
+    "replayBar": false,
+    "detailsPanel": true,
+    "pageOverflow": {
+      "x": false,
+      "y": false
+    }
+  },
+  "scenarioState": {
+    "detailsPanel": true,
+    "panelTitle": "Panama Canal",
+    "chart": true,
+    "chartNote": null
+  },
+  "camera": {
+    "nearest": [
+      {
+        "name": "Panama CanalPanamaNormal · -1.",
+        "distancePx": 1
+      },
+      {
+        "name": "Strait of GibraltarSpain · Mor",
+        "distancePx": 7269
+      },
+      {
+        "name": "English Channel (Dover Strait)",
+        "distancePx": 8691
+      },
+      {
+        "name": "Cape of Good HopeSouth AfricaN",
+        "distancePx": 9864
+      }
+    ],
+    "mapSize": {
+      "w": 890,
+      "h": 705
+    }
+  },
+  "cameraInitial": {
+    "nearest": [
+      {
+        "name": "Strait of HormuzIran · OmanSev",
+        "distancePx": 291
+      },
+      {
+        "name": "Gulf of AdenYemen · Somalia · ",
+        "distancePx": 355
+      },
+      {
+        "name": "Strait of MalaccaMalaysia · In",
+        "distancePx": 376
+      },
+      {
+        "name": "Bab-el-MandebYemen · Djibouti ",
+        "distancePx": 415
+      }
+    ],
+    "mapSize": {
+      "w": 1250,
+      "h": 705
+    }
+  },
+  "cameraBefore": {
+    "nearest": [
+      {
+        "name": "Panama CanalPanamaNormal · +2.",
+        "distancePx": 1
+      },
+      {
+        "name": "Strait of GibraltarSpain · Mor",
+        "distancePx": 7269
+      },
+      {
+        "name": "English Channel (Dover Strait)",
+        "distancePx": 8691
+      },
+      {
+        "name": "Cape of Good HopeSouth AfricaN",
+        "distancePx": 9864
+      }
+    ],
+    "mapSize": {
+      "w": 890,
+      "h": 705
+    }
+  },
+  "routeChokepoints": null,
+  "portPanel": null
+}

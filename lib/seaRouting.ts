@@ -22,7 +22,9 @@ const KNOTS = 14;
 const KM_PER_NM = 1.852;
 // Ports can sit well inland of the nearest sea-network vertex (e.g. Mundra is
 // ~280 km from the densified network), so allow a generous snap radius.
-const PORT_SNAP_KM = 500;
+// Snap ports to the nearest network segment; the nearest segment can be a few
+// hundred km away on the coarse bundled network (e.g. Mundra ≈ 300 km).
+const PORT_SNAP_KM = 600;
 const H3 = (c: [number, number]) => c[0].toFixed(5) + "|" + c[1].toFixed(5);
 
 // Chord length between two lon/lat points, in km. Good enough for short edges.
@@ -47,6 +49,24 @@ export function daysForKm(km: number): number {
   return km / (KNOTS * KM_PER_NM * 24);
 }
 
+/**
+ * Prepend/append the real port coordinates to a snapped sea path so the drawn
+ * line visibly connects to the port dot (nearest network node can be far).
+ */
+export function connectEndpoints(
+  coords: [number, number][],
+  start: [number, number],
+  end: [number, number],
+): [number, number][] {
+  const out: [number, number][] = [];
+  const first = coords[0];
+  const last = coords[coords.length - 1];
+  if (!first || first[0] !== start[0] || first[1] !== start[1]) out.push(start);
+  out.push(...coords);
+  if (last && (last[0] !== end[0] || last[1] !== end[1])) out.push(end);
+  return out;
+}
+
 // ---------------------------------------------------------------------------
 // Graph
 // ---------------------------------------------------------------------------
@@ -56,12 +76,14 @@ type Graph = {
   coords: Map<string, [number, number]>;
   /** adjacency: key -> { to: key; edgeId: string; km: number }[] */
   adj: Map<string, { to: string; edgeId: string; km: number }[]>;
+  /** every undirected segment as [nodeA, nodeB] (for edge snapping) */
+  segments: [string, string][];
 };
 
 let graph: Graph | null = null;
 
 function buildGraph(): Graph {
-  const g: Graph = { coords: new Map(), adj: new Map() };
+  const g: Graph = { coords: new Map(), adj: new Map(), segments: [] };
   const ensure = (c: [number, number]): string => {
     const k = H3(c);
     if (!g.coords.has(k)) g.coords.set(k, c);
@@ -80,6 +102,7 @@ function buildGraph(): Graph {
       if (!g.adj.has(k)) g.adj.set(k, []);
       g.adj.get(prev)!.push({ to: k, edgeId: id, km });
       g.adj.get(k)!.push({ to: prev, edgeId: id, km });
+      g.segments.push([prev, k]);
       prev = k;
     }
   }
@@ -91,19 +114,28 @@ function getGraph(): Graph {
   return graph;
 }
 
-/** Node key nearest to a lon/lat within `maxKm` (snapping ports onto water). */
-function nearestNode(c: [number, number], maxKm: number): string | null {
+/**
+ * Snap a point to the network the way searoute-js does: find the nearest
+ * segment by perpendicular distance, then take that segment's nearer endpoint.
+ * (Using the nearest *node* instead sends routes on odd coastal detours.)
+ */
+function snapToVertex(c: [number, number], maxKm: number): string | null {
   const g = getGraph();
-  let best: string | null = null;
   let bestKm = maxKm;
-  for (const [k, nc] of g.coords) {
-    const d = chordKm(c, nc);
+  let bestA: string | null = null;
+  let bestB: string | null = null;
+  for (const [a, b] of g.segments) {
+    const d = pointToSegmentKm(c, g.coords.get(a)!, g.coords.get(b)!);
     if (d < bestKm) {
       bestKm = d;
-      best = k;
+      bestA = a;
+      bestB = b;
     }
   }
-  return best;
+  if (!bestA || !bestB) return null;
+  const da = chordKm(c, g.coords.get(bestA)!);
+  const db = chordKm(c, g.coords.get(bestB)!);
+  return da <= db ? bestA : bestB;
 }
 
 // ---------------------------------------------------------------------------
@@ -116,15 +148,12 @@ export function findSeaPath(
   blockedEdges: Set<string> = new Set(),
 ): SeaPath | null {
   const g = getGraph();
-  const s = nearestNode(from, PORT_SNAP_KM);
-  const t = nearestNode(to, PORT_SNAP_KM);
+  const s = snapToVertex(from, PORT_SNAP_KM);
+  const t = snapToVertex(to, PORT_SNAP_KM);
   if (!s || !t) return null;
 
   const dist = new Map<string, number>([[s, 0]]);
   const prevNode = new Map<string, string>();
-  const prevEdge = new Map<string, string>();
-  // Binary-heap-free priority selection is fine at this scale, but a simple
-  // bucket queue reads better. Use a Set-based lazy heap via sorted insertion.
   const queue = new Set<string>([s]);
 
   while (queue.size > 0) {
@@ -147,7 +176,6 @@ export function findSeaPath(
       if (nd < (dist.get(edge.to) ?? Infinity)) {
         dist.set(edge.to, nd);
         prevNode.set(edge.to, u);
-        prevEdge.set(edge.to, edge.edgeId);
         queue.add(edge.to);
       }
     }
@@ -155,7 +183,6 @@ export function findSeaPath(
 
   if (!dist.has(t)) return null;
 
-  // Reconstruct node chain + blocked-collection of used edges.
   const chain: string[] = [t];
   let cur = t;
   while (cur !== s) {
@@ -166,8 +193,8 @@ export function findSeaPath(
   }
   chain.reverse();
 
-  const coords = chain.map((k) => g.coords.get(k)!);
-  const lengthKm = dist.get(t)!;
+  const coords = connectEndpoints(chain.map((k) => g.coords.get(k)!), from, to);
+  const lengthKm = pathLengthKm(coords);
   return { coords, lengthKm, days: daysForKm(lengthKm) };
 }
 
@@ -265,14 +292,18 @@ export type Reroute = {
 };
 
 /**
- * Reroute a computed path avoiding all edges near `avoidChokepoint`.
- * Returns null if no water path exists without it.
+ * Reroute a computed path avoiding all edges near any of `avoidChokepoints`
+ * (their blocked-edge sets are unioned). Returns null if no water path exists.
  */
-export function rerouteAvoiding(
+export function rerouteAvoidingMany(
   original: SeaPath,
-  avoidChokepoint: Chokepoint,
+  avoidChokepoints: Chokepoint[],
 ): Reroute | null {
-  const blocked = edgesNearChokepoint(avoidChokepoint);
+  if (avoidChokepoints.length === 0) return null;
+  const blocked = new Set<string>();
+  for (const chokepoint of avoidChokepoints) {
+    for (const edgeId of edgesNearChokepoint(chokepoint)) blocked.add(edgeId);
+  }
   const first = original.coords[0];
   const last = original.coords[original.coords.length - 1];
   const detour = findSeaPath(first, last, blocked);
@@ -284,4 +315,15 @@ export function rerouteAvoiding(
     extraKm: detour.lengthKm - original.lengthKm,
     extraDays: detour.days - original.days,
   };
+}
+
+/**
+ * Reroute a computed path avoiding all edges near `avoidChokepoint`.
+ * Returns null if no water path exists without it.
+ */
+export function rerouteAvoiding(
+  original: SeaPath,
+  avoidChokepoint: Chokepoint,
+): Reroute | null {
+  return rerouteAvoidingMany(original, [avoidChokepoint]);
 }

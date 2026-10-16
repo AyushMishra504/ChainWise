@@ -1,0 +1,79 @@
+{
+  "label": "taskb-verify2",
+  "card": "Hormuz",
+  "sessions": [
+    {
+      "n": 28,
+      "analysis": 0.7607142850756645,
+      "map": 0.0821428554398673,
+      "render": 7.47857142718775
+    },
+    {
+      "n": 28,
+      "analysis": 0.6857142863529069,
+      "map": 0.08928571375352996,
+      "render": 6.471428573131561
+    },
+    {
+      "n": 28,
+      "analysis": 0.6892857152436461,
+      "map": 0.07142856983201844,
+      "render": 7.22142857047064
+    }
+  ],
+  "median": {
+    "analysis": 0.6892857152436461,
+    "map": 0.0821428554398673,
+    "render": 7.22142857047064
+  },
+  "webgl": true,
+  "markers": 0,
+  "warnings": [],
+  "tooltipDump": null,
+  "initial": {
+    "replayBar": false,
+    "detailsPanel": false,
+    "headerChip": "ChainWiseData sources",
+    "pageOverflow": {
+      "x": false,
+      "y": false
+    }
+  },
+  "cardLabelAfterClick": "Paused",
+  "layout": {
+    "header": {
+      "x": 0,
+      "y": 0,
+      "w": 1570,
+      "h": 56
+    },
+    "footer": {
+      "x": 0,
+      "y": 761,
+      "w": 1570,
+      "h": 44
+    },
+    "left": {
+      "x": 0,
+      "y": 56,
+      "w": 320,
+      "h": 705
+    },
+    "right": {
+      "x": 1210,
+      "y": 56,
+      "w": 360,
+      "h": 705
+    },
+    "map": {
+      "x": 320,
+      "y": 56,
+      "w": 890,
+      "h": 705
+    },
+    "clipped": {
+      "x": false,
+      "y": false
+    }
+  }
+}

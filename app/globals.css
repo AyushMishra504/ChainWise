@@ -1,26 +1,110 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-app-bg: #0b0f14;
+  --color-app-surface: #121620;
+  /* Solid panel surface: panels sit in their own grid column, never over the map. */
+  --color-app-panel: #121620;
+  --color-app-elevated: #161b26;
+  --color-app-input: #1a1f2c;
+  --color-app-border: #1e2332;
+  --color-app-divider: #222736;
+  --color-app-text: #e2e5ec;
+  --color-app-muted: #8c93a4;
+  --color-app-route: #6a80a0;
+  --color-app-amber: #e8a33d;
+  --color-app-red: #de4343;
+
+  --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, monospace;
+
+  --shadow-panel: 0 4px 20px rgba(0, 0, 0, 0.35);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  height: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-app-bg);
+  color: var(--color-app-text);
+  font-family: var(--font-sans);
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Austere minimal scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #121620;
+}
+::-webkit-scrollbar-thumb {
+  background: #222736;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #8c93a4;
+}
+
+/*
+ * Replay charts redraw from scratch on every update: the paths carry
+ * `pathLength="1"`, so one dash covers the whole line and animating the offset
+ * from 1 to 0 draws it left to right. The duration matches the replay tick so a
+ * fresh draw lands as the next frame arrives.
+ */
+.chart-draw {
+  stroke-dasharray: 1;
+  animation: chart-draw 200ms ease-out;
+}
+
+@keyframes chart-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.chart-dot {
+  animation: chart-dot 200ms ease-out;
+}
+
+@keyframes chart-dot {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Small dark attribution pill, bottom-right, muted text. */
+.maplibregl-ctrl.maplibregl-ctrl-attrib {
+  margin: 6px;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  background-color: rgba(11, 15, 20, 0.85);
+  border: 1px solid #1e2332;
+  color: var(--color-app-muted);
+  font-size: 10px;
+  line-height: 1.6;
+}
+.maplibregl-ctrl-attrib .maplibregl-ctrl-attrib-inner {
+  font-size: 10px;
+}
+.maplibregl-ctrl-attrib a {
+  color: var(--color-app-muted);
+  text-decoration: none;
+}
+.maplibregl-ctrl-attrib a:hover {
+  text-decoration: underline;
+}
+/* The pill is always expanded, so the disclosure arrow is not needed. */
+.maplibregl-ctrl-attrib .maplibregl-ctrl-attrib-button {
+  display: none;
 }

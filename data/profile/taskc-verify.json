@@ -1,0 +1,124 @@
+{
+  "label": "taskc-verify",
+  "card": "Hormuz",
+  "sessions": [
+    {
+      "n": 32,
+      "analysis": 0.5437500001862645,
+      "map": 0.04999999841675162,
+      "render": 6.437499997671694
+    }
+  ],
+  "median": {
+    "analysis": 0.5437500001862645,
+    "map": 0.04999999841675162,
+    "render": 6.437499997671694
+  },
+  "webgl": true,
+  "markers": 40,
+  "warnings": [],
+  "tooltipDump": null,
+  "initial": {
+    "replayBar": false,
+    "detailsPanel": false,
+    "headerChip": "ChainWiseData sources",
+    "pageOverflow": {
+      "x": false,
+      "y": false
+    }
+  },
+  "cardLabelAfterClick": "Playing",
+  "layout": {
+    "header": {
+      "x": 0,
+      "y": 0,
+      "w": 1570,
+      "h": 56
+    },
+    "footer": {
+      "x": 0,
+      "y": 761,
+      "w": 1570,
+      "h": 44
+    },
+    "left": {
+      "x": 0,
+      "y": 56,
+      "w": 320,
+      "h": 705
+    },
+    "right": {
+      "x": 1210,
+      "y": 56,
+      "w": 360,
+      "h": 705
+    },
+    "map": {
+      "x": 320,
+      "y": 56,
+      "w": 890,
+      "h": 705
+    },
+    "clipped": {
+      "x": false,
+      "y": false
+    }
+  },
+  "backToLive": true,
+  "liveState": {
+    "headerChip": "ChainWiseData sourcesLive, data to 2026-10-11 (cached)",
+    "replayBar": false,
+    "detailsPanel": true,
+    "pageOverflow": {
+      "x": false,
+      "y": false
+    }
+  },
+  "scenarioState": {
+    "detailsPanel": true,
+    "panelTitle": "Strait of Hormuz",
+    "chart": true,
+    "chartNote": null
+  },
+  "routeChokepoints": {
+    "jnpt-rotterdam": [
+      "Suez CanalOpen",
+      "Bab-el-MandebOpen",
+      "Strait of GibraltarOpen",
+      "English Channel (Dover Strait)Open",
+      "Gulf of AdenOpen"
+    ],
+    "mundra-rotterdam": [
+      "Suez CanalOpen",
+      "Bab-el-MandebOpen",
+      "Strait of GibraltarOpen",
+      "English Channel (Dover Strait)Open"
+    ],
+    "chennai-shanghai": [
+      "Strait of MalaccaOpen",
+      "Taiwan StraitOpen",
+      "Singapore StraitOpen"
+    ],
+    "jebel-ali-mundra": [
+      "Strait of HormuzBlocked"
+    ],
+    "cochin-singapore": [
+      "Strait of MalaccaOpen",
+      "Singapore StraitOpen"
+    ],
+    "mundra-new-york": [
+      "Suez CanalOpen",
+      "Bab-el-MandebOpen",
+      "Strait of GibraltarOpen"
+    ],
+    "ras-tanura-sikka": [
+      "Strait of HormuzBlocked"
+    ],
+    "novorossiysk-sikka": [
+      "Suez CanalOpen",
+      "Bab-el-MandebOpen",
+      "Bosphorus StraitOpen",
+      "DardanellesOpen"
+    ]
+  }
+}

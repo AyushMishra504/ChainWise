@@ -20,6 +20,7 @@
 # production
 /build
 
+
 # misc
 .DS_Store
 *.pem
@@ -36,6 +37,13 @@ yarn-error.log*
 # vercel
 .vercel
 
+.freebuff
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# portwatch runtime cache (committed fallback lives in data/replay/)
+/data/cache
+
+*.md

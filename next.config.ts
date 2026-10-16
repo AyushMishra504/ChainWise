@@ -4,6 +4,8 @@ const nextConfig: NextConfig = {
   /* config options here */
   cacheComponents: true,
   partialPrefetching: true,
+  // The dev overlay would sit on top of the map and panel chrome.
+  devIndicators: false,
   turbopack: {
     root: __dirname,
     rules: {

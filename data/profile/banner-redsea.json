@@ -1,0 +1,180 @@
+{
+  "label": "banner-redsea",
+  "card": "Red Sea",
+  "sessions": [
+    {
+      "n": 32,
+      "analysis": 0.5906249997206032,
+      "map": 0.06875000055879354,
+      "render": 7.606250001117587
+    }
+  ],
+  "median": {
+    "analysis": 0.5906249997206032,
+    "map": 0.06875000055879354,
+    "render": 7.606250001117587
+  },
+  "webgl": true,
+  "markers": 40,
+  "warnings": [],
+  "tooltipDump": null,
+  "initial": {
+    "replayBar": false,
+    "detailsPanel": false,
+    "headerChip": "ChainWiseData sources",
+    "pageOverflow": {
+      "x": false,
+      "y": false
+    }
+  },
+  "cardLabelAfterClick": "Playing",
+  "layout": {
+    "header": {
+      "x": 0,
+      "y": 0,
+      "w": 1570,
+      "h": 56
+    },
+    "footer": {
+      "x": 0,
+      "y": 761,
+      "w": 1570,
+      "h": 44
+    },
+    "left": {
+      "x": 0,
+      "y": 56,
+      "w": 320,
+      "h": 705
+    },
+    "right": {
+      "x": 1210,
+      "y": 56,
+      "w": 360,
+      "h": 705
+    },
+    "map": {
+      "x": 320,
+      "y": 56,
+      "w": 890,
+      "h": 705
+    },
+    "clipped": {
+      "x": false,
+      "y": false
+    }
+  },
+  "backToLive": true,
+  "liveState": {
+    "headerChip": "ChainWiseData sourcesLive, data to 2026-10-11 (cached)",
+    "replayBar": false,
+    "detailsPanel": true,
+    "pageOverflow": {
+      "x": false,
+      "y": false
+    }
+  },
+  "scenarioState": {
+    "detailsPanel": true,
+    "panelTitle": "Bab-el-Mandeb",
+    "chart": true,
+    "chartNote": null,
+    "bannerText": "Red Sea crisis",
+    "bannerColor": "rgb(222, 67, 67)",
+    "bannerGapAboveDotPx": 3
+  },
+  "camera": {
+    "nearest": [
+      {
+        "name": "Strait of HormuzIran · OmanWat",
+        "distancePx": 291
+      },
+      {
+        "name": "Gulf of AdenYemen · Somalia · ",
+        "distancePx": 355
+      },
+      {
+        "name": "Strait of MalaccaMalaysia · In",
+        "distancePx": 376
+      },
+      {
+        "name": "Bab-el-MandebYemen · Djibouti ",
+        "distancePx": 415
+      }
+    ],
+    "mapSize": {
+      "w": 890,
+      "h": 705
+    }
+  },
+  "cameraInitial": {
+    "nearest": [
+      {
+        "name": "Strait of HormuzIran · OmanSev",
+        "distancePx": 291
+      },
+      {
+        "name": "Gulf of AdenYemen · Somalia · ",
+        "distancePx": 355
+      },
+      {
+        "name": "Strait of MalaccaMalaysia · In",
+        "distancePx": 376
+      },
+      {
+        "name": "Bab-el-MandebYemen · Djibouti ",
+        "distancePx": 415
+      }
+    ],
+    "mapSize": {
+      "w": 1250,
+      "h": 705
+    }
+  },
+  "cameraBefore": {
+    "nearest": [
+      {
+        "name": "Strait of HormuzIran · OmanNor",
+        "distancePx": 291
+      },
+      {
+        "name": "Gulf of AdenYemen · Somalia · ",
+        "distancePx": 355
+      },
+      {
+        "name": "Strait of MalaccaMalaysia · In",
+        "distancePx": 376
+      },
+      {
+        "name": "Bab-el-MandebYemen · Djibouti ",
+        "distancePx": 415
+      }
+    ],
+    "mapSize": {
+      "w": 890,
+      "h": 705
+    }
+  },
+  "chartRedraw": {
+    "present": true,
+    "distinctNodes": 8,
+    "distinctOffsets": [
+      "0.864051px",
+      "0.740545px",
+      "0.511362px",
+      "0.315829px",
+      "0.22992px",
+      "0.0934242px",
+      "0.0446337px",
+      "1px",
+      "0.74091px",
+      "0.512319px",
+      "0.409722px",
+      "0.230637px"
+    ],
+    "animationName": "chart-draw",
+    "maxAnimations": 1
+  },
+  "routeChokepoints": null,
+  "portPanel": null
+}

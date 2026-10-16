@@ -1,0 +1,183 @@
+{
+  "label": "taskc-redraw2",
+  "card": "Hormuz",
+  "sessions": [
+    {
+      "n": 41,
+      "analysis": 0.5634146358181791,
+      "map": 0.03170731772736805,
+      "render": 7.465853661662194
+    },
+    {
+      "n": 41,
+      "analysis": 0.5414634136165061,
+      "map": 0.03414634051846295,
+      "render": 7.002439025698639
+    }
+  ],
+  "median": {
+    "analysis": 0.5524390247173425,
+    "map": 0.0329268291229155,
+    "render": 7.2341463436804165
+  },
+  "webgl": true,
+  "markers": 40,
+  "warnings": [],
+  "tooltipDump": null,
+  "initial": {
+    "replayBar": false,
+    "detailsPanel": false,
+    "headerChip": "ChainWiseData sources",
+    "pageOverflow": {
+      "x": false,
+      "y": false
+    }
+  },
+  "cardLabelAfterClick": "Playing",
+  "layout": {
+    "header": {
+      "x": 0,
+      "y": 0,
+      "w": 1570,
+      "h": 56
+    },
+    "footer": {
+      "x": 0,
+      "y": 761,
+      "w": 1570,
+      "h": 44
+    },
+    "left": {
+      "x": 0,
+      "y": 56,
+      "w": 320,
+      "h": 705
+    },
+    "right": {
+      "x": 1210,
+      "y": 56,
+      "w": 360,
+      "h": 705
+    },
+    "map": {
+      "x": 320,
+      "y": 56,
+      "w": 890,
+      "h": 705
+    },
+    "clipped": {
+      "x": false,
+      "y": false
+    }
+  },
+  "backToLive": true,
+  "liveState": {
+    "headerChip": "ChainWiseData sourcesLive, data to 2026-10-11 (cached)",
+    "replayBar": false,
+    "detailsPanel": true,
+    "pageOverflow": {
+      "x": false,
+      "y": false
+    }
+  },
+  "scenarioState": {
+    "detailsPanel": true,
+    "panelTitle": "Strait of Hormuz",
+    "chart": true,
+    "chartNote": null
+  },
+  "camera": {
+    "nearest": [
+      {
+        "name": "Strait of HormuzIran · OmanDis",
+        "distancePx": 1
+      },
+      {
+        "name": "Gulf of AdenYemen · Somalia · ",
+        "distancePx": 1611
+      },
+      {
+        "name": "Bab-el-MandebYemen · Djibouti ",
+        "distancePx": 1811
+      },
+      {
+        "name": "Suez CanalEgyptStructurally do",
+        "distancePx": 2240
+      }
+    ],
+    "mapSize": {
+      "w": 890,
+      "h": 705
+    }
+  },
+  "cameraInitial": {
+    "nearest": [
+      {
+        "name": "Strait of HormuzIran · OmanSev",
+        "distancePx": 291
+      },
+      {
+        "name": "Gulf of AdenYemen · Somalia · ",
+        "distancePx": 355
+      },
+      {
+        "name": "Strait of MalaccaMalaysia · In",
+        "distancePx": 376
+      },
+      {
+        "name": "Bab-el-MandebYemen · Djibouti ",
+        "distancePx": 415
+      }
+    ],
+    "mapSize": {
+      "w": 1250,
+      "h": 705
+    }
+  },
+  "cameraBefore": {
+    "nearest": [
+      {
+        "name": "Strait of HormuzIran · OmanWat",
+        "distancePx": 1
+      },
+      {
+        "name": "Gulf of AdenYemen · Somalia · ",
+        "distancePx": 1611
+      },
+      {
+        "name": "Bab-el-MandebYemen · Djibouti ",
+        "distancePx": 1811
+      },
+      {
+        "name": "Suez CanalEgyptStructurally do",
+        "distancePx": 2240
+      }
+    ],
+    "mapSize": {
+      "w": 890,
+      "h": 705
+    }
+  },
+  "chartRedraw": {
+    "present": true,
+    "distinctNodes": 8,
+    "distinctOffsets": [
+      "0.864456px",
+      "0.739947px",
+      "0.512753px",
+      "0.410123px",
+      "0.230963px",
+      "0.0931478px",
+      "0.0444306px",
+      "5.30483e-07px",
+      "1px",
+      "0.864386px",
+      "0.73867px",
+      "0.510998px"
+    ],
+    "animationName": "chart-draw",
+    "maxAnimations": 1
+  },
+  "routeChokepoints": null,
+  "portPanel": null
+}
